@@ -18,7 +18,7 @@ public class SectorService {
         return repository.save(sector);
     }
 
-    public List<Sector> returnSector () {
+    public List<Sector> returnAll() {
         return repository.findAll();
     }
 

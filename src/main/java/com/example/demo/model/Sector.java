@@ -17,7 +17,7 @@ public class Sector {
 
     @JsonIgnore
     @OneToMany(mappedBy = "sector", cascade = CascadeType.ALL)
-    private List<Centro> centro;
+    private List<Center> center;
 
     public Sector() {
     }
@@ -46,11 +46,11 @@ public class Sector {
         this.lider = lider;
     }
 
-    public List<Centro> getCentro() {
-        return centro;
-    }
-
-    public void setCentro(List<Centro> centro) {
-        this.centro = centro;
-    }
+//    public List<Centro> getCentro() {
+//        return centro;
+//    }
+//
+//    public void setCentro(List<Centro> centro) {
+//        this.centro = centro;
+//    }
 }
