@@ -18,16 +18,16 @@ public class SectorService {
         return repository.save(sector);
     }
 
-    public List<Sector> returnAll() {
+    public List<Sector> findAll() {
         return repository.findAll();
     }
 
-    public Optional<Sector> returnSectorId(Long id) {
+    public Optional<Sector> findById(Long id) {
         return repository.findById(id);
     }
 
-   public void dellSector(Optional<Sector> sector) {
+    public void dellSector(Optional<Sector> sector) {
         repository.delete(sector.get());
-   }
+    }
 
 }

@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Sector;
 import com.example.demo.repository.SectorRepository;
 import com.example.demo.service.SectorService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ public class SectorController {
     @Autowired
     private SectorService service;
 
-    //Adiciona os Sectors
     @PostMapping
     public ResponseEntity<?> saveSector(@RequestBody Sector sector) {
         return ResponseEntity.status(HttpStatus.OK).body(service.saveSector(sector));
@@ -28,17 +26,17 @@ public class SectorController {
 
     @GetMapping
     public ResponseEntity<List<Sector>> returnAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Sector>> returnSectorId(@PathVariable(value = "id")Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.returnSectorId(id));
+    public ResponseEntity<Optional<Sector>> findById(@PathVariable(value = "id")Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> alterSector(@PathVariable(value = "id") Long id, @RequestBody Sector sector) {
-        Optional<Sector> busca = service.returnSectorId(id);
+        Optional<Sector> busca = service.findById(id);
 
         if (busca.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body("Setor não encontrado");
@@ -52,7 +50,7 @@ public class SectorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> dellSector(@PathVariable(value = "id") Long id, @RequestBody Sector sector) {
-        Optional<Sector> busca = service.returnSectorId(id);
+        Optional<Sector> busca = service.findById(id);
 
         if (busca.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body("Setor não encontrado");
