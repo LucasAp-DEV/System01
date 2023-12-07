@@ -12,7 +12,7 @@ public class Sector {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
+    private String name;
     private String lider;
 
     @JsonIgnore
@@ -30,12 +30,12 @@ public class Sector {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLider() {
@@ -46,11 +46,11 @@ public class Sector {
         this.lider = lider;
     }
 
-//    public List<Centro> getCentro() {
-//        return centro;
-//    }
-//
-//    public void setCentro(List<Centro> centro) {
-//        this.centro = centro;
-//    }
+    public List<Center> getCenter() {
+        return center;
+    }
+
+    public void setCenter(List<Center> center) {
+        this.center = center;
+    }
 }

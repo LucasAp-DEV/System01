@@ -42,7 +42,7 @@ public class SectorController {
             return ResponseEntity.status(HttpStatus.OK).body("Setor não encontrado");
         }
         Sector sector1 = busca.get();
-        sector1.setNome(sector.getNome());
+        sector1.setName(sector.getName());
         sector1.setLider(sector.getLider());
 
         return ResponseEntity.status(HttpStatus.OK).body(service.saveSector(sector1));
