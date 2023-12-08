@@ -10,6 +10,7 @@ public class Center {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Boolean state;
 
     @ManyToOne
     @JoinColumn(name = "sector_id", referencedColumnName = "id")
@@ -32,6 +33,14 @@ public class Center {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
     public Sector getSector() {

@@ -2,9 +2,6 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 
-import javax.swing.text.StyledEditorKit;
-import java.util.List;
-
 @Entity
 @Table(name = "User")
 public class User {
