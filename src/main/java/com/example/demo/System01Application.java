@@ -11,10 +11,6 @@ public class System01Application {
 		SpringApplication.run(System01Application.class, args);
 
 		System.out.println("Servidor rodando");
-
-//		Sector sector = new Sector();
-//
-//		sector.setCentro(Arrays.asList());
 	}
 
 }
