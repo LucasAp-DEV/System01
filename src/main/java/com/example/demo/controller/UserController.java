@@ -43,7 +43,6 @@ public class UserController {
         }
         User user1 = busca.get();
         user1.setName(user1.getName());
-        user1.setState(user1.getState());
 
         return ResponseEntity.status(HttpStatus.OK).body(service.saveUser(user1));
     }

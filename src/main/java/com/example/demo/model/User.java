@@ -10,7 +10,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Boolean state;
 
     public User() {
     }
@@ -31,11 +30,4 @@ public class User {
         this.name = name;
     }
 
-    public Boolean getState() {
-        return state;
-    }
-
-    public void setState(Boolean state) {
-        this.state = state;
-    }
 }
