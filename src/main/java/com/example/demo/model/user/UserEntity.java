@@ -8,17 +8,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Entity(name = "user1")
-@Table( name = "user1")
-public class User1 implements UserDetails {
+@Entity(name = "user_entity")
+@Table( name = "user_entity")
+public class UserEntity implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private  String login;
     private String password;
+    @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    public User1(String login, String password, UserRole role) {
+    public UserEntity(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -32,7 +33,7 @@ public class User1 implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return null;
     }
 
 
@@ -61,11 +62,11 @@ public class User1 implements UserDetails {
         return true;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
