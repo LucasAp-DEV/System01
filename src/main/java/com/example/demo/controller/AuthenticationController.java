@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.infra.TokenService;
 import com.example.demo.model.Center;
 import com.example.demo.model.user.AuthenticationDTO;
+import com.example.demo.model.user.LoginResponseDTO;
 import com.example.demo.model.user.RegisterDTO;
 import com.example.demo.model.user.UserEntity;
 import com.example.demo.repository.UserEntityRepository;
@@ -28,13 +30,18 @@ public class AuthenticationController {
     @Autowired
     private UserEntityRepository repository;
 
+    @Autowired
+    TokenService tokenService;
+
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((UserEntity) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
