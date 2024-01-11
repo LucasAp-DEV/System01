@@ -1,7 +1,6 @@
 package com.example.demo.infra;
 
 import com.example.demo.repository.UserEntityRepository;
-import com.example.demo.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
