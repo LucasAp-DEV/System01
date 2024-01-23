@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.infra.TokenService;
-import com.example.demo.model.user.AuthenticationDTO;
-import com.example.demo.model.user.LoginResponseDTO;
-import com.example.demo.model.user.RegisterDTO;
-import com.example.demo.model.user.UserEntity;
+import com.example.demo.model.user.*;
 import com.example.demo.repository.UserEntityRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +11,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -52,5 +51,10 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/user")
+    public ResponseEntity getAllUsers() {
+        List<UserResponseDTO> userList = this.repository.findAll().stream().map(UserResponseDTO::new).toList();
+        return ResponseEntity.ok(userList);
+    }
 
 }
