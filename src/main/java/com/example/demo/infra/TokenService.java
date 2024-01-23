@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.impl.JWTParser;
 import com.example.demo.model.user.UserEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
-                    //.withSubject(user.getLogin())
+                    .withSubject(user.getLogin())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
@@ -47,6 +46,6 @@ public class TokenService {
     }
 
     private Instant genExpirationDate() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(10).toInstant(ZoneOffset.of("-03:00"));
     }
 }

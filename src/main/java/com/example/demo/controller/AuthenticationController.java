@@ -7,6 +7,7 @@ import com.example.demo.model.user.RegisterDTO;
 import com.example.demo.model.user.UserEntity;
 import com.example.demo.repository.UserEntityRepository;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
+@RequiredArgsConstructor
 public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -24,7 +26,8 @@ public class AuthenticationController {
     @Autowired
     private UserEntityRepository repository;
 
-    @Autowired    TokenService tokenService;
+    @Autowired
+    private TokenService tokenService;
 
 
     @PostMapping("/login")

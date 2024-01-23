@@ -22,7 +22,7 @@ public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private  String login;
+    private String login;
     private String password;
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
