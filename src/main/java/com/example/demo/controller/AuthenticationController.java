@@ -36,15 +36,15 @@ public class AuthenticationController {
 
         var token = tokenService.generateToken((UserEntity) auth.getPrincipal());
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new LoginResponseDTO(token)); //Retornando o token do login
     }
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        UserEntity newUser = new UserEntity(data.login(), encryptedPassword, data.role());
+        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
+        UserEntity newUser = new UserEntity(data.login(), encryptedPassword, data.role()); //Salando as credenciais Usuario no banco
 
         this.repository.save(newUser);
 
