@@ -18,11 +18,16 @@ public class ServicoUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private float valor;
+    private String name;
+    private Integer price;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
+
+    public ServicoUserEntity(ServiceResponserDTO data){
+        this.price = data.price();
+        this.name = data.name();
+    }
 
 }

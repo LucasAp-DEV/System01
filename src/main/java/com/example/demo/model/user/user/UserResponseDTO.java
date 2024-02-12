@@ -1,4 +1,4 @@
-package com.example.demo.model.user;
+package com.example.demo.model.user.user;
 
 import com.example.demo.model.user.user.UserEntity;
 import com.example.demo.model.user.user.UserRole;
