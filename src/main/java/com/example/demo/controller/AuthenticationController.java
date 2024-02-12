@@ -44,7 +44,7 @@ public class AuthenticationController {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();//VERIFICANDO SE EXISTE UM LOGIN NO BANCO
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
-        UserEntity newUser = new UserEntity(data.login(), encryptedPassword, data.role()); //Salando as credenciais Usuario no banco
+        UserEntity newUser = new UserEntity(data.login(), encryptedPassword, data.role(), data.email(), data.sexo(), data.contato(), data.nome()); //Salando as credenciais Usuario no banco
 
         this.repository.save(newUser);
 

@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity(name = "user_entity")
-@Table( name = "user_entity")
+@Table( name = "USUARIO")
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,25 @@ public class UserEntity implements UserDetails {
 
     private String password;
 
+    private String email;
+
+    private String sexo;
+
+    private String contato;
+
+    private String nome;
+
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    public UserEntity(String login, String password, UserRole role) {
+    public UserEntity(String login, String password, UserRole role, String email, String sexo, String contato, String nome) {
         this.login = login;
         this.password = password;
         this.role = role;
+        this.email = email;
+        this.sexo = sexo;
+        this.contato = contato;
+        this.nome = nome;
     }
 
     @Override
