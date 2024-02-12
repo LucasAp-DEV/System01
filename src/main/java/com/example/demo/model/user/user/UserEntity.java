@@ -1,4 +1,4 @@
-package com.example.demo.model.user;
+package com.example.demo.model.user.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,19 +22,12 @@ public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String login;
-
     private String password;
-
     private String email;
-
     private String sexo;
-
     private String contato;
-
     private String nome;
-
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 

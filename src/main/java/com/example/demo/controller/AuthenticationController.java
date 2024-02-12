@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.infra.TokenService;
 import com.example.demo.model.user.*;
+import com.example.demo.model.user.user.RegisterDTO;
+import com.example.demo.model.user.user.UserEntity;
 import com.example.demo.repository.UserEntityRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
