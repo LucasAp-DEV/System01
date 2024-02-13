@@ -16,22 +16,29 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "user_entity")
-@Table( name = "USUARIO")
-public class UserEntity implements UserDetails {
+@Entity(name = "client")
+@Table( name = "CLIENT")
+public class Client implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String login;
+
     private String password;
+
     private String email;
+
     private String sexo;
+
     private String contato;
+
     private String nome;
+
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    public UserEntity(String login, String password, UserRole role, String email, String sexo, String contato, String nome) {
+    public Client(String login, String password, UserRole role, String email, String sexo, String contato, String nome) {
         this.login = login;
         this.password = password;
         this.role = role;
@@ -43,8 +50,8 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.role == UserRole.USER) return List.of(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_CLIENT"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_CLIENT"));
     }
 
     @Override

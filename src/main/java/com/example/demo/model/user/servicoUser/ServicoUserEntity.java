@@ -1,6 +1,6 @@
 package com.example.demo.model.user.servicoUser;
 
-import com.example.demo.model.user.user.UserEntity;
+import com.example.demo.model.user.user.Client;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -17,17 +17,16 @@ public class ServicoUserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String name;
     private Integer price;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserEntity user;
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client;
 
     public ServicoUserEntity(ServiceResponserDTO data){
         this.price = data.price();
         this.name = data.name();
     }
-
 }

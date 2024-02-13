@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 public record ServiceUserRequest(
         @NotBlank
         String name,
-
         @NotNull
         Integer price
 ) {

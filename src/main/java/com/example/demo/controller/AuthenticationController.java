@@ -1,11 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.infra.TokenService;
-import com.example.demo.model.user.user.RegisterDTO;
-import com.example.demo.model.user.user.AuthenticationDTO;
-import com.example.demo.model.user.user.LoginResponseDTO;
-import com.example.demo.model.user.user.UserEntity;
-import com.example.demo.model.user.user.UserResponseDTO;
+import com.example.demo.model.user.user.*;
 import com.example.demo.repository.UserEntityRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +34,7 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((UserEntity) auth.getPrincipal());
+        var token = tokenService.generateToken((Client) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginResponseDTO(token)); //Retornando o token do login
     }
@@ -48,7 +44,7 @@ public class AuthenticationController {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();//VERIFICANDO SE EXISTE UM LOGIN NO BANCO
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
-        UserEntity newUser = new UserEntity(data.login(), encryptedPassword, data.role(), data.email(), data.sexo(), data.contato(), data.nome()); //Salando as credenciais Usuario no banco
+        Client newUser = new Client(data.login(), encryptedPassword, data.role(), data.email(), data.sexo(), data.contato(), data.nome()); //Salando as credenciais Usuario no banco
 
         this.repository.save(newUser);
 
