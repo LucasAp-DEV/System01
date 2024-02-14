@@ -34,7 +34,7 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((Client) auth.getPrincipal());
+        var token = tokenService.generateToken((Users) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginResponseDTO(token)); //Retornando o token do login
     }
@@ -44,7 +44,7 @@ public class AuthenticationController {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();//VERIFICANDO SE EXISTE UM LOGIN NO BANCO
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
-        Client newUser = new Client(data.login(), encryptedPassword, data.role(), data.email(), data.sexo(), data.contato(), data.nome()); //Salando as credenciais Usuario no banco
+        Users newUser = new Users(data.login(), encryptedPassword, data.role(), data.email(), data.sexo(), data.contato(), data.nome()); //Salando as credenciais Usuario no banco
 
         this.repository.save(newUser);
 

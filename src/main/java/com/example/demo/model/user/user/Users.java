@@ -18,27 +18,21 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 @Entity(name = "client")
 @Table( name = "CLIENT")
-public class Client implements UserDetails {
+public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String login;
-
     private String password;
-
     private String email;
-
     private String sexo;
-
     private String contato;
-
     private String nome;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    public Client(String login, String password, UserRole role, String email, String sexo, String contato, String nome) {
+    public Users(String login, String password, UserRole role, String email, String sexo, String contato, String nome) {
         this.login = login;
         this.password = password;
         this.role = role;
