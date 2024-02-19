@@ -12,47 +12,31 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@Table(name = "users")
+@Entity(name = "users")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "client")
-@Table( name = "CLIENT")
-public class Users implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String login;
     private String password;
-    private String email;
-    private String sexo;
-    private String contato;
-    private String nome;
-
-    @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    public Users(String login, String password, UserRole role, String email, String sexo, String contato, String nome) {
+    public User(String login, String password, UserRole role){
         this.login = login;
         this.password = password;
         this.role = role;
-        this.email = email;
-        this.sexo = sexo;
-        this.contato = contato;
-        this.nome = nome;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.USER) return List.of(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_CLIENT"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_CLIENT"));
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
 
     @Override
     public String getUsername() {
@@ -78,5 +62,4 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

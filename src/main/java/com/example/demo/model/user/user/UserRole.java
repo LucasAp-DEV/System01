@@ -2,7 +2,7 @@ package com.example.demo.model.user.user;
 
 public enum UserRole {
 
-    CLIENT("client"),
+    ADMIN("admin"),
     USER("user");
 
     private String role;
