@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.user.AuthenticationDTO;
-import com.example.demo.domain.user.LoginResponseDTO;
-import com.example.demo.domain.user.RegisterDTO;
-import com.example.demo.domain.user.User;
+import com.example.demo.domain.user.*;
 import com.example.demo.infra.TokenService;
 import com.example.demo.repository.UserEntityRepository;
 import jakarta.validation.Valid;
@@ -12,10 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("auth")
@@ -48,4 +44,6 @@ public class AuthenticationController {
 
         return ResponseEntity.ok().build();
     }
+
 }
+
