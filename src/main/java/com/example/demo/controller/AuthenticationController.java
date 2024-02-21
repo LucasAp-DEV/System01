@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.user.*;
+import com.example.demo.domain.user.AuthenticationDTO;
+import com.example.demo.domain.user.LoginResponseDTO;
+import com.example.demo.domain.user.RegisterUserDTO;
+import com.example.demo.domain.user.User;
 import com.example.demo.infra.TokenService;
 import com.example.demo.repository.UserEntityRepository;
 import jakarta.validation.Valid;
@@ -33,11 +36,11 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity register(@RequestBody @Valid RegisterUserDTO data) {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();//VERIFICANDO SE EXISTE UM LOGIN NO BANCO
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
-        User newUser = new User(data.login(), encryptedPassword, data.role()); //Salando as credenciais Usuario no banco
+        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telephone(), data.sexo()); //Salando as credenciais Usuario no banco
 
         this.repository.save(newUser);
 

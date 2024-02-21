@@ -28,7 +28,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize //Autorizando as requisições a baixo
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/serviceuser/service").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/service/register").permitAll()
                         .anyRequest().authenticated() //Deixando outras requisições permitidas
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
