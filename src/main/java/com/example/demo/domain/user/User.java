@@ -1,6 +1,6 @@
 package com.example.demo.domain.user;
 
-import com.example.demo.domain.service.Service;
+import com.example.demo.domain.local.Local;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class User implements UserDetails {
 
     @JsonIgnore
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
-    private List<Service> services = new ArrayList<>();
+    private List<Local> locais = new ArrayList<>();
 
     public User(String login, String password, UserRole role, String nome, String email, String telephone, String sexo){
         this.login = login;
