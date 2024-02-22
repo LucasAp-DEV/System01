@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -22,7 +23,7 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
-    private Date data;
+    private LocalDate data;
     private String status;
 
     @ManyToOne
@@ -33,7 +34,7 @@ public class Contrato {
     @JoinColumn(name = "local_id", referencedColumnName = "id")
     private Local localId;
 
-    public Contrato(String descricao, Date data, User userId, Local localId, String status) {
+    public Contrato(String descricao, LocalDate data, User userId, Local localId, String status) {
         this.descricao = descricao;
         this.data = data;
         this.userId = userId;
