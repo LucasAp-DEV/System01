@@ -50,21 +50,11 @@ public class AuthenticationController {
     public ResponseEntity updatLocal(@RequestBody UpdateUserDTO data) {
         User updatUser = repository.getReferenceById(data.id());
 
-        if (data.nome() != null) {
-            updatUser.setNome(data.nome());
-        }
-        if (data.email() != null) {
-            updatUser.setEmail(data.email());
-        }
-        if (data.login() != null) {
-            updatUser.setLogin(data.login());
-        }
-        if (data.sexo() != null) {
-            updatUser.setSexo(data.sexo());
-        }
-        if (data.telephone() != null) {
-            updatUser.setTelephone(data.telephone());
-        }
+        if (data.nome() != null) {updatUser.setNome(data.nome());}
+        if (data.email() != null) {updatUser.setEmail(data.email());}
+        if (data.login() != null) {updatUser.setLogin(data.login());}
+        if (data.sexo() != null) {updatUser.setSexo(data.sexo());}
+        if (data.telephone() != null) {updatUser.setTelephone(data.telephone());}
 
         this.repository.save(updatUser);
 
