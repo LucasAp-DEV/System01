@@ -30,6 +30,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/local/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/contrato/register").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/auth/update").permitAll()
                         .anyRequest().authenticated() //Deixando outras requisições permitidas
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
