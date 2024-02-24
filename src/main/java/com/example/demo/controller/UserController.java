@@ -5,18 +5,17 @@ import com.example.demo.infra.TokenService;
 import com.example.demo.repository.UserEntityRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 
 @RestController
 @RequestMapping("auth")
-public class AuthenticationController {
+public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -25,7 +24,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
+    public ResponseEntity loginUser(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -35,7 +34,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterUserDTO data) {
+    public ResponseEntity registerUser(@RequestBody @Valid RegisterUserDTO data) {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();//VERIFICANDO SE EXISTE UM LOGIN NO BANCO
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
@@ -57,6 +56,15 @@ public class AuthenticationController {
         if (data.telephone() != null) {updatUser.setTelephone(data.telephone());}
 
         this.repository.save(updatUser);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity deletUser(@RequestBody UpdateUserDTO data) {
+        User updatUser = repository.getReferenceById(data.id());
+
+        this.repository.delete(updatUser);
 
         return ResponseEntity.ok().build();
     }
