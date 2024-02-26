@@ -4,15 +4,13 @@ import com.example.demo.domain.contrato.Contrato;
 import com.example.demo.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -25,7 +23,7 @@ public class Local {
     private Long id;
     private String endereco;
     private String descricao;
-    private float price;
+    private Integer price;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -35,7 +33,7 @@ public class Local {
     @OneToMany(mappedBy = "localId", cascade = CascadeType.ALL)
     private List<Contrato> contratos = new ArrayList<>();
 
-    public Local(String descricao, float price, User userId, String endereco) {
+    public Local(String descricao, Integer price, User userId, String endereco) {
         this.descricao = descricao;
         this.price = price;
         this.userId = userId;
