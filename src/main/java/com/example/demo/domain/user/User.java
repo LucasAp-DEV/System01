@@ -1,5 +1,6 @@
 package com.example.demo.domain.user;
 
+import com.example.demo.domain.cidade.Cidade;
 import com.example.demo.domain.local.Local;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -37,7 +38,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Local> locais = new ArrayList<>();
 
-    public User(String login, String password, UserRole role, String nome, String email, String telephone, String sexo){
+    @ManyToOne
+    @JoinColumn(name = "cidadeId", referencedColumnName = "id")
+    private Cidade cidadeId;
+
+    public User(String login, String password, UserRole role, String nome, String email, String telephone, String sexo, Cidade cidadeId){
         this.login = login;
         this.password = password;
         this.role = role;
@@ -45,6 +50,7 @@ public class User implements UserDetails {
         this.email = email;
         this.telephone = telephone;
         this.sexo = sexo;
+        this.cidadeId = cidadeId;
     }
 
     @Override

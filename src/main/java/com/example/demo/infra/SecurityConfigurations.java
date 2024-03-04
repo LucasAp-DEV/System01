@@ -26,11 +26,24 @@ public class SecurityConfigurations {
                 .csrf(AbstractHttpConfigurer::disable) //Desabilitar o csrf
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize //Autorizando as requisições a baixo
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        //Requisições user-
+                        .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/user/update").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/user/delete").permitAll()
+                        //Requisições local-
                         .requestMatchers(HttpMethod.POST, "/local/register").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/local/update").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/local/delete").permitAll()
+                        //Requisições contrato-
                         .requestMatchers(HttpMethod.POST, "/contrato/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/auth/update").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/contrato/upadate").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/contrato/delete").permitAll()
+                        //Requisições cidade-
+                        .requestMatchers(HttpMethod.POST, "/cidade/register").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/cidade/update").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/cidade/delete").permitAll()
+
                         .anyRequest().authenticated() //Deixando outras requisições permitidas
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

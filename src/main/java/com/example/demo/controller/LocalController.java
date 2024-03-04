@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.domain.local.RegisterLocalDTO;
 import com.example.demo.domain.local.Local;
 import com.example.demo.domain.local.UpdateLocalDTO;
+import com.example.demo.domain.user.UpdateUserDTO;
+import com.example.demo.domain.user.User;
 import com.example.demo.repository.LocalRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,15 @@ public class LocalController {
         this.repository.delete(dellLocal);
 
         return  ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity deletLocal(@RequestBody UpdateLocalDTO data) {
+        Local updatLocal = repository.getReferenceById(data.id());
+
+        this.repository.delete(updatLocal);
+
+        return ResponseEntity.ok().build();
     }
 
 }

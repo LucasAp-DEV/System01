@@ -9,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
 
-@RestController
-@RequestMapping("contrato")
-public class CointratoController {
+public class ContratoController {
 
     @Autowired
     private ContratoRepository repository;

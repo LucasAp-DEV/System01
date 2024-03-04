@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("user")
 public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -38,7 +38,7 @@ public class UserController {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();//VERIFICANDO SE EXISTE UM LOGIN NO BANCO
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
-        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telephone(), data.sexo()); //Salando as credenciais Usuario no banco
+        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telephone(), data.sexo(), data.cidadeId()); //Salando as credenciais Usuario no banco
 
         this.repository.save(newUser);
 
@@ -54,6 +54,7 @@ public class UserController {
         if (data.login() != null) {updatUser.setLogin(data.login());}
         if (data.sexo() != null) {updatUser.setSexo(data.sexo());}
         if (data.telephone() != null) {updatUser.setTelephone(data.telephone());}
+        if (data.cidadeId() != null) {updatUser.setCidadeId(data.cidadeId());}
 
         this.repository.save(updatUser);
 
