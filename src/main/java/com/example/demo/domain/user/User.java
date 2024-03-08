@@ -23,33 +23,45 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID",unique = true)
     private Long id;
-    private String login;
-    private String password;
-    private String nome;
-    private String email;
-    private String telephone;
-    private String sexo;
 
+    @Column(name = "LOGIN",unique = true)
+    private String login;
+
+    @Column(name = "PASSWORD")
+    private String password;
+
+    @Column(name = "NOME")
+    private String nome;
+
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "TELEPHONE")
+    private String telephone;
+
+    @Column(name = "ROLE")
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
+    @Column(name = "LOCAIS")
     @JsonIgnore
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Local> locais = new ArrayList<>();
 
+    @Column(name = "CIDADE")
     @ManyToOne
     @JoinColumn(name = "cidadeId", referencedColumnName = "id")
     private Cidade cidadeId;
 
-    public User(String login, String password, UserRole role, String nome, String email, String telephone, String sexo, Cidade cidadeId){
+    public User(String login, String password, UserRole role, String nome, String email, String telephone, Cidade cidadeId){
         this.login = login;
         this.password = password;
         this.role = role;
         this.nome = nome;
         this.email = email;
         this.telephone = telephone;
-        this.sexo = sexo;
         this.cidadeId = cidadeId;
     }
 
