@@ -3,14 +3,19 @@ package com.example.demo.controller;
 import com.example.demo.domain.user.*;
 import com.example.demo.infra.TokenService;
 import com.example.demo.repository.UserEntityRepository;
+import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -22,6 +27,9 @@ public class UserController {
     private UserEntityRepository repository;
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private UserService service;
 
     @PostMapping("/login")
     public ResponseEntity loginUser(@RequestBody @Valid AuthenticationDTO data){
@@ -69,5 +77,19 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping
+    public ResponseEntity getAllUsers() {
+        List<UserResponseDTO> userList = this.repository.findAll().stream().map(UserResponseDTO::new).toList();
+        return ResponseEntity.ok(userList);
+    }
+
+    @GetMapping("/id")
+    public ResponseEntity getByUser(@RequestBody UpdateUserDTO data) {
+        User getUser = repository.getReferenceById(data.id());
+        UserResponseDTO userOptional = new UserResponseDTO(getUser);
+        return ResponseEntity.ok(userOptional);
+    }
+
 }
 

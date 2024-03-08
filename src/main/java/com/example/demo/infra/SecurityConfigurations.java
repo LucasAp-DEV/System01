@@ -31,6 +31,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/user/update").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/user/delete").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/id").permitAll()
                         //Requisições local-
                         .requestMatchers(HttpMethod.POST, "/local/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/local/update").permitAll()
