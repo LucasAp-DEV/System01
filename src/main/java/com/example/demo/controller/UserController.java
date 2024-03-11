@@ -80,7 +80,9 @@ public class UserController {
     @GetMapping("/id")
     public ResponseEntity getByIdUser(@RequestBody UpdateUserDTO data) {
         User getUser = repository.getReferenceById(data.id());
+
         UserResponseDTO userOptional = new UserResponseDTO(getUser);
+
         return ResponseEntity.ok(userOptional);
     }
 

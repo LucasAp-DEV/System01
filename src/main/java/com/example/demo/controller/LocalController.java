@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.local.LocalResponseDTO;
 import com.example.demo.domain.local.RegisterLocalDTO;
 import com.example.demo.domain.local.Local;
 import com.example.demo.domain.local.UpdateLocalDTO;
-import com.example.demo.domain.user.UpdateUserDTO;
-import com.example.demo.domain.user.User;
 import com.example.demo.repository.LocalRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +54,15 @@ public class LocalController {
         this.repository.delete(updatLocal);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/id")
+    public ResponseEntity getByIdLocal(@RequestBody UpdateLocalDTO data) {
+        Local getLocal = repository.getReferenceById(data.id());
+
+        LocalResponseDTO localOptional = new LocalResponseDTO(getLocal);
+
+        return ResponseEntity.ok(localOptional);
     }
 
 }

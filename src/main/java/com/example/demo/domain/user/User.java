@@ -23,34 +23,25 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID",unique = true)
     private Long id;
 
-    @Column(name = "LOGIN",unique = true)
     private String login;
 
-    @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "NOME")
     private String nome;
 
-    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "TELEPHONE")
     private String telephone;
 
-    @Column(name = "ROLE")
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    @Column(name = "LOCAIS")
     @JsonIgnore
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Local> locais = new ArrayList<>();
 
-    @Column(name = "CIDADE")
     @ManyToOne
     @JoinColumn(name = "cidadeId", referencedColumnName = "id")
     private Cidade cidadeId;

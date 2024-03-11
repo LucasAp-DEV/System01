@@ -24,10 +24,8 @@ public class Cidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME",unique = true)
     private String name;
 
-    @Column(name = "USERS")
     @JsonIgnore
     @OneToMany(mappedBy = "cidadeId")
     private List<User> users = new ArrayList<>();

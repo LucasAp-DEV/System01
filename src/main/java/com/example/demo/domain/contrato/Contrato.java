@@ -21,21 +21,16 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DESCRICAO")
     private String descricao;
 
-    @Column(name = "DATA")
     private LocalDate data;
 
-    @Column(name = "STATUS")
     private String status;
 
-    @Column(name = "USER_ID")
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;
 
-    @Column(name = "LOCAL_ID")
     @ManyToOne
     @JoinColumn(name = "local_id", referencedColumnName = "id")
     private Local localId;

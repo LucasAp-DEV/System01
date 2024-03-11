@@ -22,16 +22,12 @@ public class Local {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ENDERECO")
     private String endereco;
 
-    @Column(name = "DESCRICAO")
     private String descricao;
 
-    @Column(name = "PRICE")
     private Integer price;
 
-    @Column(name = "USER_ID")
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User userId;

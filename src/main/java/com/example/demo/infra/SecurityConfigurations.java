@@ -37,6 +37,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/local/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/local/update").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/local/delete").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/local/id").permitAll()
                         //Requisições contrato-
                         .requestMatchers(HttpMethod.POST, "/contrato/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/contrato/upadate").permitAll()
