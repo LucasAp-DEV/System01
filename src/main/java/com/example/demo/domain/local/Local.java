@@ -22,11 +22,8 @@ public class Local {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String endereco;
-
     private String descricao;
-
     private Integer price;
 
     @ManyToOne

@@ -24,15 +24,10 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String login;
-
     private String password;
-
     private String nome;
-
     private String email;
-
     private String telephone;
 
     @Enumerated(value = EnumType.STRING)
