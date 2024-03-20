@@ -1,8 +1,7 @@
 package com.example.demo.domain.image;
 
-public record ImageResponseDTO(String name, byte[] image) {
+public record ImageResponseDTO(byte[] image) {
     public ImageResponseDTO(Image image) {
-        this(image.getName(), image.getImage());
+        this(image.getImage());
     }
-
 }

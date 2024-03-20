@@ -1,5 +1,6 @@
 package com.example.demo.domain.image;
 
+import com.example.demo.domain.local.Local;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,13 +18,18 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
     @Lob
+    @Column(length = 1000000)
     private byte[] image;
 
-    public Image (String name, byte[] image) {
-        this.name = name;
+    @ManyToOne
+    @JoinColumn(name = "local_id", referencedColumnName = "id")
+    private Local localId;
+
+    public Image(byte[] image, Local localId) {
         this.image = image;
+        this.localId = localId;
     }
+
 }

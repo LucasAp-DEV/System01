@@ -46,6 +46,11 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/cidade/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/cidade/update").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/cidade/delete").permitAll()
+                        //Requisições image-
+                        .requestMatchers(HttpMethod.POST, "/images/register").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/images/update").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/images/delete").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/images/list").permitAll()
 
                         .anyRequest().authenticated() //Deixando outras requisições permitidas
                 )
