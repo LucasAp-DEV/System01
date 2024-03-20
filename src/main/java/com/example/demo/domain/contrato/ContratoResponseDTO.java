@@ -1,7 +1,6 @@
 package com.example.demo.domain.contrato;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public record ContratoResponseDTO(String descricao, LocalDate data, String status) {
 
