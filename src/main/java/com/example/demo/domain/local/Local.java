@@ -1,6 +1,7 @@
 package com.example.demo.domain.local;
 
 import com.example.demo.domain.contrato.Contrato;
+import com.example.demo.domain.feedback.Feedback;
 import com.example.demo.domain.image.Image;
 import com.example.demo.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,6 +38,10 @@ public class Local {
     @JsonIgnore
     @OneToMany(mappedBy = "localId", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "localId", cascade = CascadeType.ALL)
+    private List<Feedback> feedbacks = new ArrayList<>();
 
     public Local(String descricao, Integer price, User userId, String endereco) {
         this.descricao = descricao;
