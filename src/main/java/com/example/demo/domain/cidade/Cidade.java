@@ -1,6 +1,5 @@
 package com.example.demo.domain.cidade;
 
-import com.example.demo.domain.local.Local;
 import com.example.demo.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

@@ -22,7 +22,7 @@ public class TokenService {
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("auth-api")
+                    .withIssuer("TCC-api")
                     .withClaim("Id", user.getId())
                     .withSubject(user.getLogin())
                     .withClaim("Role", user.getRole().ordinal())
