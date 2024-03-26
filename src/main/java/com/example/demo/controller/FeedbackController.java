@@ -27,6 +27,7 @@ public class FeedbackController {
 
     @DeleteMapping("/delete")
     public ResponseEntity deleteFeedbac(@RequestBody @Valid FeedbackDTO data) {
+
         Optional<Feedback> deleteFeedback = repository.findById((data.id()));
         if(deleteFeedback.isEmpty()) {
             this.repository.deleteById(data.id());
