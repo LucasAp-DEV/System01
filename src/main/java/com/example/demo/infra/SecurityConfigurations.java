@@ -40,11 +40,11 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/local/id").permitAll()
                         //Requisições contrato-
                         .requestMatchers(HttpMethod.POST, "/contrato/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/contrato/upadate").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/contrato/update/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/contrato/delete").permitAll()
                         //Requisições cidade-
                         .requestMatchers(HttpMethod.POST, "/cidade/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/cidade/update").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/cidade/update/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/cidade/delete").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cidade/list").permitAll()
                         //Requisições image-

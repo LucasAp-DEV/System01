@@ -29,7 +29,7 @@ public class Contrato {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "local_id", referencedColumnName = "id")
@@ -40,12 +40,12 @@ public class Contrato {
     private List<Feedback> feedbacks = new ArrayList<>();
 
 
-    public Contrato(String descricao, LocalDate data, User userId, Local local, String status) {
-        this.descricao = descricao;
-        this.data = data;
-        this.userId = userId;
-        this.local = local;
-        this.status = status;
-    }
+//    public Contrato(String descricao, LocalDate data, User userId, Local local, String status) {
+//        this.descricao = descricao;
+//        this.data = data;
+//        this.userId = userId;
+//        this.local = local;
+//        this.status = status;
+//    }
 
 }

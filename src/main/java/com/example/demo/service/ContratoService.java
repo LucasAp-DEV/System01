@@ -34,6 +34,8 @@ public class ContratoService {
         contrato.setDescricao(data.getDescricao());
         contrato.setStatus(data.getStatus());
         contrato.setData(data.getData());
+        contrato.setLocal(data.getLocal());//teste
+        contrato.setUser(data.getUser());//teste
 
         repository.save(contrato);
 
