@@ -21,15 +21,9 @@ public class CidadeService {
         return getrepository.save(cidade);
     }
 
-//    public Cidade returnId(Long id) {
-//        return getrepository.findById(id).orElseThrow(()-> new RuntimeException("Cidade não encontrada"));
-//    }
+
     public Cidade returnName(String name) {
         return getrepository.findByName(name);
     }
 
-//    public void deleteCidade(Long id) {
-//        var cidade = returnId(id);
-//        getrepository.delete(cidade);
-//    }
 }

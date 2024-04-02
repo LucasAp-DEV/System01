@@ -28,8 +28,12 @@ public class Cidade {
     @OneToMany(mappedBy = "cidade")
     private List<User> users = new ArrayList<>();
 
-    public Cidade(String name) {
-        this.name = name;
-    }
-
+//    @Override
+//    public String toString() {
+//        return "Cidade{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", users=" + users +
+//                '}';
+//    }
 }

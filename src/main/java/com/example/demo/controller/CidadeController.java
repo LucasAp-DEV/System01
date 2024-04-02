@@ -25,11 +25,11 @@ public class CidadeController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerCidade(@RequestBody @Valid Cidade cidade) {
-        var findByName = service.returnName(cidade.getName());
-        if (findByName != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A cidade " + cidade.getName() + " já existe");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(service.saveCidade(cidade));
+      var CidadeExistente = service.returnName(cidade.getName());
+      if(CidadeExistente != null){
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cidade ja Cadastrada");
+      }
+      return ResponseEntity.status(HttpStatus.OK).body(service.saveCidade(cidade));
     }
 
     @GetMapping("/list")

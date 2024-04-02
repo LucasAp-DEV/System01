@@ -4,8 +4,10 @@ import com.example.demo.domain.contrato.Contrato;
 import com.example.demo.domain.contrato.RegisterContratoDTO;
 import com.example.demo.domain.contrato.UpdateContratoDTO;
 import com.example.demo.repository.ContratoRepository;
+import com.example.demo.service.ContratoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,25 +18,22 @@ public class ContratoController {
     @Autowired
     private ContratoRepository repository;
 
+    @Autowired
+    private ContratoService service;
+
+    @GetMapping("/list")
+    public ResponseEntity<?> returnAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
+    }
+
     @PostMapping("/register")
-    public ResponseEntity registerContrato(@RequestBody @Valid  RegisterContratoDTO data) {
-        Contrato newContrato = new Contrato(data.descricao(),data.data(), data.userId(), data.localId(), data.status());
-
-        this.repository.save(newContrato);
-
+    public ResponseEntity<String> registerContrato(@RequestBody @Valid Contrato data) {
+        service.saveContrato(data);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update")
-    public ResponseEntity updateContrato(@RequestBody UpdateContratoDTO data) {
-        Contrato updateContrato = repository.getReferenceById(data.id());
-
-        if(data.descricao() != null) {updateContrato.setDescricao(data.descricao());}
-        if(data.status() != null) {updateContrato.setStatus(data.status());}
-        if(data.data() != null) {updateContrato.setData(data.data());}
-
-        this.repository.save(updateContrato);
-
-        return ResponseEntity.ok().build();
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateContrato(@PathVariable(value = "id")Long id ,@RequestBody Contrato data) {
+        return service.updateById(id, data);
     }
 }
