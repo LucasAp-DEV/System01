@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class ContratoController {
 
     @Autowired
-    private ContratoRepository repository;
-
-    @Autowired
     private ContratoService service;
 
     @GetMapping("/list")

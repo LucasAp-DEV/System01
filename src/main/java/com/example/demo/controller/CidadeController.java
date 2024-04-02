@@ -17,8 +17,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("cidade")
 public class CidadeController {
-    @Autowired
-    private CidadeRepository repository;
 
     @Autowired
     private CidadeService service;
@@ -29,7 +27,8 @@ public class CidadeController {
       if(CidadeExistente != null){
           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cidade ja Cadastrada");
       }
-      return ResponseEntity.status(HttpStatus.OK).body(service.saveCidade(cidade));
+      service.saveCidade(cidade);
+      return ResponseEntity.status(HttpStatus.OK).body("Cidade Cadastrada");
     }
 
     @GetMapping("/list")

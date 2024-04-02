@@ -16,9 +16,6 @@ import java.util.List;
 public class FeedbackController {
 
     @Autowired
-    private FeedbackRepository repository;
-
-    @Autowired
     private FeedbackService service;
 
     @GetMapping("/list")
@@ -27,15 +24,15 @@ public class FeedbackController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Feedback data) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(service.saveFeedback(data));
+    public ResponseEntity<String> register(@RequestBody Feedback data) {
+        service.saveFeedback(data);
+        return ResponseEntity.status(HttpStatus.OK).body("Feedback Cadastrado");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteFeedback(@PathVariable(value = "id")Long id) {
+    public ResponseEntity<String> deleteFeedback(@PathVariable(value = "id")Long id) {
         service.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("FeedBack Excluido");
 
     }
 }

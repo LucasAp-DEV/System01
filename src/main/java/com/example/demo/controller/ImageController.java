@@ -2,16 +2,14 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.image.Image;
 import com.example.demo.domain.image.UpdateImageDTO;
-import com.example.demo.domain.local.Local;
 import com.example.demo.repository.ImageRepository;
-import com.example.demo.repository.LocalRepository;
+import com.example.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,25 +18,19 @@ import java.util.Optional;
 public class ImageController {
 
     @Autowired
-    private ImageRepository imageRepository;
-
-    @Autowired
-    private LocalRepository localRepository;
+    private ImageService service;
 
     @PostMapping("/register")
-    public ResponseEntity registerImage(@RequestParam("file") MultipartFile file,
-                                        @RequestParam("localId") Long localId) {
+    public ResponseEntity<String> registerImage(@RequestParam("file") MultipartFile file,
+                                                @RequestParam("localId") Long localId) {
         try {
             var imageData = file.getBytes();
-            Local local = localRepository.findById(localId).orElse(null);
-            if (local == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Local Nao Encontrado");
-            }
+            var local = service.finByIdLocal(localId);
             Image image = new Image(imageData, local);
-            this.imageRepository.save(image);
-            return ResponseEntity.ok().build();
+            service.saveImage(image);
+            return ResponseEntity.ok().body("Imagen Cadastrada");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register image");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Imagen não cadastrada");
         }
     }
 
