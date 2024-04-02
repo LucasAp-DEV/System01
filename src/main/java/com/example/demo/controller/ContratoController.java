@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.contrato.Contrato;
-import com.example.demo.domain.contrato.RegisterContratoDTO;
-import com.example.demo.domain.contrato.UpdateContratoDTO;
 import com.example.demo.repository.ContratoRepository;
 import com.example.demo.service.ContratoService;
 import jakarta.validation.Valid;
@@ -29,11 +27,11 @@ public class ContratoController {
     @PostMapping("/register")
     public ResponseEntity<String> registerContrato(@RequestBody @Valid Contrato data) {
         service.saveContrato(data);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Contrado Cadastrado");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateContrato(@PathVariable(value = "id")Long id ,@RequestBody Contrato data) {
+    public ResponseEntity<String> updateContrato(@PathVariable(value = "id") Long id, @RequestBody Contrato data) {
         return service.updateById(id, data);
     }
 }
