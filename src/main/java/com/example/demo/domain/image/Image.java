@@ -25,11 +25,11 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "local_id", referencedColumnName = "id")
-    private Local localId;
+    private Local local;
 
-    public Image(byte[] image, Local localId) {
+    public Image(byte[] image, Local local) {
         this.image = image;
-        this.localId = localId;
+        this.local = local;
     }
 
 }

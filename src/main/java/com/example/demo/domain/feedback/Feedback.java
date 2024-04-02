@@ -1,5 +1,7 @@
 package com.example.demo.domain.feedback;
 
+import com.example.demo.domain.cidade.Cidade;
+import com.example.demo.domain.contrato.Contrato;
 import com.example.demo.domain.local.Local;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,12 +22,13 @@ public class Feedback {
     private int nota;
 
     @ManyToOne
-    @JoinColumn(name = "local_id", referencedColumnName = "id")
-    private Local localId;
+    @JoinColumn(name = "contratoId", referencedColumnName = "id")
+    private Contrato contrato;
 
-    public Feedback(String descricao, int nota, Local localId) {
+
+    public Feedback(String descricao, int nota, Contrato contrato) {
         this.descricao = descricao;
         this.nota = nota;
-        this.localId = localId;
+        this.contrato = contrato;
     }
 }

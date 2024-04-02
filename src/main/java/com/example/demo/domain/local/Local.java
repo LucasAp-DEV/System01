@@ -32,16 +32,12 @@ public class Local {
     private User userId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "localId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Contrato> contratos = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "localId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "localId", cascade = CascadeType.ALL)
-    private List<Feedback> feedbacks = new ArrayList<>();
 
     public Local(String descricao, Integer price, User userId, String endereco) {
         this.descricao = descricao;

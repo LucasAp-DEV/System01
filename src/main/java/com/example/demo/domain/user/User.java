@@ -39,16 +39,16 @@ public class User implements UserDetails {
 
     @ManyToOne
     @JoinColumn(name = "cidadeId", referencedColumnName = "id")
-    private Cidade cidadeId;
+    private Cidade cidade;
 
-    public User(String login, String password, UserRole role, String nome, String email, String telephone, Cidade cidadeId){
+    public User(String login, String password, UserRole role, String nome, String email, String telephone, Cidade cidade){
         this.login = login;
         this.password = password;
         this.role = role;
         this.nome = nome;
         this.email = email;
         this.telephone = telephone;
-        this.cidadeId = cidadeId;
+        this.cidade = cidade;
     }
 
     @Override

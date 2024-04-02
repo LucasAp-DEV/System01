@@ -1,11 +1,15 @@
 package com.example.demo.domain.contrato;
 
+import com.example.demo.domain.feedback.Feedback;
 import com.example.demo.domain.local.Local;
 import com.example.demo.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,13 +33,18 @@ public class Contrato {
 
     @ManyToOne
     @JoinColumn(name = "local_id", referencedColumnName = "id")
-    private Local localId;
+    private Local local;
 
-    public Contrato(String descricao, LocalDate data, User userId, Local localId, String status) {
+    @JsonIgnore
+    @OneToMany(mappedBy = "contrato", cascade = CascadeType.ALL)
+    private List<Feedback> feedbacks = new ArrayList<>();
+
+
+    public Contrato(String descricao, LocalDate data, User userId, Local local, String status) {
         this.descricao = descricao;
         this.data = data;
         this.userId = userId;
-        this.localId = localId;
+        this.local = local;
         this.status = status;
     }
 

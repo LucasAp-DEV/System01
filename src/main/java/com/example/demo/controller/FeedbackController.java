@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("feedback")
@@ -20,24 +21,21 @@ public class FeedbackController {
     @Autowired
     private FeedbackService service;
 
+    @GetMapping("/list")
+    public ResponseEntity<List<Feedback>> returnall() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
+    }
+
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody Feedback data) {
+    public ResponseEntity<?> register(@RequestBody Feedback data) {
 
         return ResponseEntity.status(HttpStatus.OK).body(service.saveFeedback(data));
-//        Feedback newFeedback = new Feedback(data.descricao(), data.nota(), data.localId());
-//        this.repository.save(newFeedback);
-//        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteFeedback(@PathVariable(value = "id")Long id) {
-        Optional<Feedback> dell = service.returnId(id);
-
-        if (dell.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        service.dellFeedback(dell);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<?> deleteFeedback(@PathVariable(value = "id")Long id) {
+        service.deleteById(id);
+        return ResponseEntity.ok().build();
 
     }
 }

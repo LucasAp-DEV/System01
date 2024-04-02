@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
 
     Cidade findByName(String name);
+
 }

@@ -25,10 +25,11 @@ public class Cidade {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cidadeId")
+    @OneToMany(mappedBy = "cidade")
     private List<User> users = new ArrayList<>();
 
     public Cidade(String name) {
         this.name = name;
     }
+
 }

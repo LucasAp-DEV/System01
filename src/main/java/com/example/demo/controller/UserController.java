@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -55,7 +54,7 @@ public class UserController {
         if (data.email() != null) {updatUser.setEmail(data.email());}
         if (data.login() != null) {updatUser.setLogin(data.login());}
         if (data.telephone() != null) {updatUser.setTelephone(data.telephone());}
-        if (data.cidadeId() != null) {updatUser.setCidadeId(data.cidadeId());}
+        if (data.cidadeId() != null) {updatUser.setCidade(data.cidadeId());}
 
         this.repository.save(updatUser);
 

@@ -46,6 +46,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/cidade/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/cidade/update").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/cidade/delete").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cidade/list").permitAll()
                         //Requisições image-
                         .requestMatchers(HttpMethod.POST, "/images/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/images/update").permitAll()
@@ -53,7 +54,6 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/images/list").permitAll()
                         //Requisições feedback-
                         .requestMatchers(HttpMethod.POST, "/feedback/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/feedback/update").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/feedback/delete/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/feedback/list").permitAll()
 

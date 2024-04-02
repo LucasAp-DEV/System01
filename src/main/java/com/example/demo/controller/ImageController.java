@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class ImageController {
     public ResponseEntity registerImage(@RequestParam("file") MultipartFile file,
                                         @RequestParam("localId") Long localId) {
         try {
-            byte[] imageData = file.getBytes();
+            var imageData = file.getBytes();
             Local local = localRepository.findById(localId).orElse(null);
             if (local == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Local Nao Encontrado");
