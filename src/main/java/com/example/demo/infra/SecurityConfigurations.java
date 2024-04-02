@@ -51,6 +51,11 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.PUT, "/images/update").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/images/delete").permitAll()
                         .requestMatchers(HttpMethod.GET, "/images/list").permitAll()
+                        //Requisições feedback-
+                        .requestMatchers(HttpMethod.POST, "/feedback/register").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/feedback/update").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/feedback/delete/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/feedback/list").permitAll()
 
                         .anyRequest().authenticated() //Deixando outras requisições permitidas
                 )
