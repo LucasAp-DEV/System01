@@ -45,13 +45,11 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/contrato/list").permitAll()
                         //Requisições cidade-
                         .requestMatchers(HttpMethod.POST, "/cidade/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/cidade/update/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/cidade/delete").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cidade/list").permitAll()
                         //Requisições image-
                         .requestMatchers(HttpMethod.POST, "/images/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/images/update").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/images/delete").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/images/delete/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/images/list").permitAll()
                         //Requisições feedback-
                         .requestMatchers(HttpMethod.POST, "/feedback/register").permitAll()

@@ -33,7 +33,6 @@ public class ContratoService {
             );
             contratosDTO.add(contratoDTO);
         }
-
         return contratosDTO;
     }
 

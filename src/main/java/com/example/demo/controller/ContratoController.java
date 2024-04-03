@@ -17,7 +17,7 @@ public class ContratoController {
     private ContratoService service;
 
     @GetMapping("/list")
-    public ResponseEntity<?> returnAll() {
+    public ResponseEntity returnAll() {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
     }
 

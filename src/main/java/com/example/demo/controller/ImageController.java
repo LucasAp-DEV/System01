@@ -1,8 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.image.Image;
-import com.example.demo.domain.image.UpdateImageDTO;
-import com.example.demo.repository.ImageRepository;
 import com.example.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("images")
@@ -21,34 +16,19 @@ public class ImageController {
     private ImageService service;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerImage(@RequestParam("file") MultipartFile file,
-                                                @RequestParam("localId") Long localId) {
-        try {
-            var imageData = file.getBytes();
-            var local = service.finByIdLocal(localId);
-            Image image = new Image(imageData, local);
-            service.saveImage(image);
-            return ResponseEntity.ok().body("Imagen Cadastrada");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagen não cadastrada");
-        }
+    public ResponseEntity<String> registerImage(@RequestParam("file") MultipartFile file, @RequestParam("localId") Long id) {
+        return service.saveImage2(file, id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteImage(@PathVariable(value = "id") Long id) {
+        service.dellImage(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Imagen deletada");
     }
 
 
-//    @DeleteMapping("/delete")
-//    public ResponseEntity deleteImage(@RequestBody UpdateImageDTO data) {
-//        Optional<Image> optionalImage = imageRepository.findById(data.id());
-//        if (optionalImage.isPresent()) {
-//            this.imageRepository.deleteById(data.id());
-//            return ResponseEntity.status(HttpStatus.OK).body("Imagen Deletada");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagen Não Deletada");
-//        }
-//    }
-//
-//    @GetMapping("/list")
-//    public ResponseEntity<List<Image>> getAllImages() {
-//        List<Image> images = imageRepository.findAll();
-//        return ResponseEntity.status(HttpStatus.OK).body(images);
-//    }
+    @GetMapping("/list")
+    public ResponseEntity getAllImages() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
+    }
 }
