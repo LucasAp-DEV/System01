@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class ImageService {
     private LocalRepository localRepository;
 
     //Listando Imagnes
-    public List<ImageDTO> returnall(){
+    public List<ImageDTO> returnAll(){
         List<Image> imageList = repository.findAll();
         List<ImageDTO> imageDTOS = new ArrayList<>();
 
@@ -38,33 +39,28 @@ public class ImageService {
         return imageDTOS;
     }
 
-    //Salvando Imagen
     public Image saveImage(Image image){
         return repository.save(image);
     }
 
-    //Busnando Imagen por ID
-    public Image finById(Long id) {
+    public Image findById(Long id) {
        return repository.findById(id).orElseThrow(()-> new RuntimeException("Image não Encontrada"));
     }
 
-    //Buscando Local por ID
-    public Local finByIdLocal(Long id) {
+    public Local findByIdLocal(Long id) {
         return localRepository.findById(id).orElseThrow(()-> new RuntimeException("Local não Encontrada"));
     }
 
-    //Deletando Imagen
     public void dellImage(Long id){
-        var image = finById(id);
+        var image = findById(id);
         repository.delete(image);
     }
 
-    //Salvando Imagens
     public ResponseEntity<String> saveImage2(MultipartFile file, Long id){
         try {
             var imageData = file.getBytes();
-            var local = finByIdLocal(id);
-            Image image = new Image(imageData, local);
+            var local = findByIdLocal(id);
+            Image image = new Image(Base64.getEncoder().encode(imageData), local);
             saveImage(image);
             return ResponseEntity.ok().body("Imagen Cadastrada");
         } catch (Exception e) {

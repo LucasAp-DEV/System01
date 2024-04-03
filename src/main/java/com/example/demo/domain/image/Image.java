@@ -20,7 +20,7 @@ public class Image {
     private Long id;
 
     @Lob
-    @Column(length = 1000000)
+//    @Column(length = 100000000)
     private byte[] image;
 
     @ManyToOne

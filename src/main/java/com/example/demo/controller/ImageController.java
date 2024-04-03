@@ -32,6 +32,6 @@ public class ImageController {
 
     @GetMapping("/list")
     public ResponseEntity<List<ImageDTO>> getAllImages() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
     }
 }
