@@ -35,9 +35,10 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/user/id").permitAll()
                         //Requisições local-
                         .requestMatchers(HttpMethod.POST, "/local/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/local/update").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/local/delete").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/local/id").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/local/update/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/local/delete/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/local/list").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/local/list/{id}").permitAll()
                         //Requisições contrato-
                         .requestMatchers(HttpMethod.POST, "/contrato/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/contrato/update/{id}").permitAll()

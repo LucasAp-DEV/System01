@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.contrato.Contrato;
+import com.example.demo.domain.contrato.ContratoDTO;
 import com.example.demo.repository.ContratoRepository;
 import com.example.demo.service.ContratoService;
 import jakarta.validation.Valid;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("contrato")
@@ -17,7 +20,7 @@ public class ContratoController {
     private ContratoService service;
 
     @GetMapping("/list")
-    public ResponseEntity returnAll() {
+    public ResponseEntity<List<ContratoDTO>> returnAll() {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
     }
 

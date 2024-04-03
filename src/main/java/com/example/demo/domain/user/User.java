@@ -34,7 +34,7 @@ public class User implements UserDetails {
     private UserRole role;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Local> locais = new ArrayList<>();
 
     @ManyToOne

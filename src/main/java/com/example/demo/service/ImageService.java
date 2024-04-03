@@ -23,7 +23,7 @@ public class ImageService {
     @Autowired
     private LocalRepository localRepository;
 
-
+    //Listando Imagnes
     public List<ImageDTO> returnall(){
         List<Image> imageList = repository.findAll();
         List<ImageDTO> imageDTOS = new ArrayList<>();
@@ -38,23 +38,28 @@ public class ImageService {
         return imageDTOS;
     }
 
+    //Salvando Imagen
     public Image saveImage(Image image){
         return repository.save(image);
     }
 
+    //Busnando Imagen por ID
     public Image finById(Long id) {
        return repository.findById(id).orElseThrow(()-> new RuntimeException("Image não Encontrada"));
     }
 
+    //Buscando Local por ID
     public Local finByIdLocal(Long id) {
         return localRepository.findById(id).orElseThrow(()-> new RuntimeException("Local não Encontrada"));
     }
 
+    //Deletando Imagen
     public void dellImage(Long id){
         var image = finById(id);
         repository.delete(image);
     }
 
+    //Salvando Imagens
     public ResponseEntity<String> saveImage2(MultipartFile file, Long id){
         try {
             var imageData = file.getBytes();

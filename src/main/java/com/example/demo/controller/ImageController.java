@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.image.ImageDTO;
 import com.example.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 @RestController
@@ -21,14 +24,14 @@ public class ImageController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteImage(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<String> deleteImage(@PathVariable(value = "id") Long id) {
         service.dellImage(id);
         return ResponseEntity.status(HttpStatus.OK).body("Imagen deletada");
     }
 
 
     @GetMapping("/list")
-    public ResponseEntity getAllImages() {
+    public ResponseEntity<List<ImageDTO>> getAllImages() {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
     }
 }

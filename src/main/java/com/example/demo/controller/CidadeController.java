@@ -22,7 +22,7 @@ public class CidadeController {
     private CidadeService service;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerCidade(@RequestBody @Valid Cidade cidade) {
+    public ResponseEntity<String> registerCidade(@RequestBody @Valid Cidade cidade) {
       var CidadeExistente = service.returnName(cidade.getName());
       if(CidadeExistente != null){
           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cidade ja Cadastrada");

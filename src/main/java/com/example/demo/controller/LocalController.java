@@ -1,68 +1,49 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.local.LocalResponseDTO;
-import com.example.demo.domain.local.RegisterLocalDTO;
 import com.example.demo.domain.local.Local;
-import com.example.demo.domain.local.UpdateLocalDTO;
-import com.example.demo.repository.LocalRepository;
+import com.example.demo.domain.local.LocalDTO;
+import com.example.demo.service.LocalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("local")
 public class LocalController {
 
     @Autowired
-    private LocalRepository repository;
+    private LocalService service;
 
     @PostMapping("/register")
-    public ResponseEntity registerLocal(@RequestBody @Valid RegisterLocalDTO data) {
-        Local newLocal = new Local(data.descricao(),data.price(), data.userId(), data.endereco());
-
-        this.repository.save(newLocal);
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> registerLocal(@RequestBody @Valid Local local) {
+        service.saveLocal(local);
+        return ResponseEntity.status(HttpStatus.OK).body("Local Registrado");
     }
 
-    @PutMapping("/update")
-    public ResponseEntity updateLocal(@RequestBody UpdateLocalDTO data) {
-        Local updatLocal = repository.getReferenceById(data.id());
-
-        if(data.descricao() != null) {updatLocal.setDescricao(data.descricao());}
-        if(data.price() != null) {updatLocal.setPrice(data.price());}
-        if(data.endereco() != null) {updatLocal.setEndereco(data.endereco());}
-
-        this.repository.save(updatLocal);
-
-        return ResponseEntity.ok().build();
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateLocal(@PathVariable(value = "id")Long id, @RequestBody Local data) {
+        service.updateLocal(id, data);
+        return ResponseEntity.status(HttpStatus.OK).body("Atualizado com Sucesso");
     }
 
-    @PutMapping("/delete")
-    public  ResponseEntity deleteLocal(@RequestBody UpdateLocalDTO data) {
-        Local dellLocal = repository.getReferenceById(data.id());
-        this.repository.delete(dellLocal);
-
-        return  ResponseEntity.ok().build();
+    @DeleteMapping("/delete/{id}")
+    public  ResponseEntity<String> deleteLocal(@PathVariable(value = "id")Long id) {
+        service.dellLocal(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Local Deletado");
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity deletLocal(@RequestBody UpdateLocalDTO data) {
-        Local updatLocal = repository.getReferenceById(data.id());
-
-        this.repository.delete(updatLocal);
-
-        return ResponseEntity.ok().build();
+    @GetMapping("/list") //Inserir Imagen
+    public ResponseEntity<List<LocalDTO>> getAllLocal() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity getByIdLocal(@RequestBody UpdateLocalDTO data) {
-        Local getLocal = repository.getReferenceById(data.id());
-
-        LocalResponseDTO localOptional = new LocalResponseDTO(getLocal);
-
-        return ResponseEntity.ok(localOptional);
+    @GetMapping("/list/{id}") //Inserir Imagen e verificar
+    public ResponseEntity<?> getByIdLocal(@PathVariable(value = "id")Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findByLocalId(id));
     }
 
 }

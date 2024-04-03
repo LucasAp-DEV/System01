@@ -29,7 +29,7 @@ public class Local {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+    private User user;
 
     @JsonIgnore
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
@@ -39,10 +39,10 @@ public class Local {
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
 
-    public Local(String descricao, Integer price, User userId, String endereco) {
+    public Local(String descricao, Integer price, User user, String endereco) {
         this.descricao = descricao;
         this.price = price;
-        this.userId = userId;
+        this.user = user;
         this.endereco = endereco;
     }
 }
