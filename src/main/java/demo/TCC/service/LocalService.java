@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 @Service
 public class LocalService {
 
@@ -37,7 +36,7 @@ public class LocalService {
     }
 
     public Local findById(Long id) {
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("Local não contrado"));
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Local não contrado"));
     }
 
     public void dellLocal(Long id) {
@@ -45,23 +44,19 @@ public class LocalService {
         repository.delete(dellLocal);
     }
 
-    public void updateLocal(Long id, Local data){
+    public void updateLocal(Long id, Local data) {
         var local = findById(id);
         validate(data);
         local.setPrice(data.getPrice());
         local.setEndereco(data.getEndereco());
         local.setDescricao(data.getDescricao());
-
         repository.save(local);
     }
 
     private void validate(Local data) {
-        if (Objects.isNull(data.getPrice()))
-            throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getEndereco()))
-            throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getDescricao()))
-            throw new RuntimeException("Status é requirido");
+        if (Objects.isNull(data.getPrice())) throw new RuntimeException("Status é requirido");
+        if (Objects.isNull(data.getEndereco())) throw new RuntimeException("Status é requirido");
+        if (Objects.isNull(data.getDescricao())) throw new RuntimeException("Status é requirido");
     }
 
     public LocalDTO converte(Local local) {

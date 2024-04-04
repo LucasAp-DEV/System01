@@ -25,7 +25,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody @Valid AuthenticationDTO data){
+    public ResponseEntity<?> loginUser(@RequestBody @Valid AuthenticationDTO data) {
         return service.loginUser(data);
     }
 
@@ -35,13 +35,13 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updatLocal(@PathVariable (value = "id")Long id,@RequestBody @Valid User data) {
+    public ResponseEntity<String> updatLocal(@PathVariable(value = "id") Long id, @RequestBody @Valid User data) {
         service.updateDTO(id, data);
         return ResponseEntity.status(HttpStatus.OK).body("Atualizado com Sucesso");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deletUser(@PathVariable (value = "id")Long id) {
+    public ResponseEntity<String> deletUser(@PathVariable(value = "id") Long id) {
         service.dellUser(id);
         return ResponseEntity.status(HttpStatus.OK).body("Usuario Deletado");
     }
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserResponseDTO getByIdUser(@PathVariable (value = "id")Long id) {
+    public UserResponseDTO getByIdUser(@PathVariable(value = "id") Long id) {
         return service.returnById(id);
     }
 

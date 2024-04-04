@@ -24,8 +24,7 @@ public class ImageService {
     @Autowired
     private LocalRepository localRepository;
 
-    //Listando Imagnes
-    public List<ImageDTO> returnAll(){
+    public List<ImageDTO> returnAll() {
         List<Image> imageList = repository.findAll();
         List<ImageDTO> imageDTOS = new ArrayList<>();
 
@@ -39,24 +38,24 @@ public class ImageService {
         return imageDTOS;
     }
 
-    public void saveImage(Image image){
+    public void saveImage(Image image) {
         repository.save(image);
     }
 
     public Image findById(Long id) {
-       return repository.findById(id).orElseThrow(()-> new RuntimeException("Image não Encontrada"));
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Image não Encontrada"));
     }
 
     public Local findByIdLocal(Long id) {
-        return localRepository.findById(id).orElseThrow(()-> new RuntimeException("Local não Encontrada"));
+        return localRepository.findById(id).orElseThrow(() -> new RuntimeException("Local não Encontrada"));
     }
 
-    public void dellImage(Long id){
+    public void dellImage(Long id) {
         var image = findById(id);
         repository.delete(image);
     }
 
-    public ResponseEntity<String> saveImage2(MultipartFile file, Long id){
+    public ResponseEntity<String> saveImage2(MultipartFile file, Long id) {
         try {
             var imageData = file.getBytes();
             var local = findByIdLocal(id);
@@ -68,5 +67,4 @@ public class ImageService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagen Não Cadastrada");
         }
     }
-
 }
