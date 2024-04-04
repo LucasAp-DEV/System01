@@ -29,7 +29,6 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.OK).body("Imagen deletada");
     }
 
-
     @GetMapping("/list")
     public ResponseEntity<List<ImageDTO>> getAllImages() {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());

@@ -45,5 +45,4 @@ public class LocalController {
     public ResponseEntity<?> getByIdLocal(@PathVariable(value = "id")Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByLocalId(id));
     }
-
 }
