@@ -2,16 +2,13 @@ package demo.TCC.controller;
 
 import demo.TCC.domain.user.*;
 import demo.TCC.infra.TokenService;
-import demo.TCC.repository.UserRepository;
 import demo.TCC.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,66 +20,40 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UserRepository repository;
-    @Autowired
     private TokenService tokenService;
     @Autowired
     private UserService service;
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody @Valid AuthenticationDTO data){
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
-
-        var token = tokenService.generateToken((User) auth.getPrincipal());
-
-        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(token));
+        return service.loginUser(data);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody @Valid RegisterUserDTO data) {
-        if (service.returnName(data.login()) != null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nome de usuario em uso");
-        service.saveUser(data);
-        return ResponseEntity.status(HttpStatus.OK).body("Usuario Cadastrado");
+    public ResponseEntity<?> registerUser(@RequestBody @Valid RegisterUserDTO data) {
+        return service.saveUser(data);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updatLocal(@RequestBody UpdateUserDTO data) {
-        User updatUser = repository.getReferenceById(data.id());
-
-        if (data.nome() != null) {updatUser.setNome(data.nome());}
-        if (data.email() != null) {updatUser.setEmail(data.email());}
-        if (data.login() != null) {updatUser.setLogin(data.login());}
-        if (data.telephone() != null) {updatUser.setTelephone(data.telephone());}
-        if (data.cidadeId() != null) {updatUser.setCidade(data.cidadeId());}
-
-        this.repository.save(updatUser);
-
-        return ResponseEntity.ok().build();
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updatLocal(@PathVariable (value = "id")Long id,@RequestBody @Valid User data) {
+        service.updateDTO(id, data);
+        return ResponseEntity.status(HttpStatus.OK).body("Atualizado com Sucesso");
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deletUser(@RequestBody UpdateUserDTO data) {
-        User updatUser = repository.getReferenceById(data.id());
-
-        this.repository.delete(updatUser);
-
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletUser(@PathVariable (value = "id")Long id) {
+        service.dellUser(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Usuario Deletado");
     }
 
-    @GetMapping
-    public ResponseEntity<?> getAllUsers() {
-        List<UserResponseDTO> userList = this.repository.findAll().stream().map(UserResponseDTO::new).toList();
-        return ResponseEntity.ok(userList);
+    @GetMapping("/list")
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<?> getByIdUser(@RequestBody UpdateUserDTO data) {
-        User getUser = repository.getReferenceById(data.id());
-
-        UserResponseDTO userOptional = new UserResponseDTO(getUser);
-
-        return ResponseEntity.ok(userOptional);
+    @GetMapping("/{id}")
+    public UserResponseDTO getByIdUser(@PathVariable (value = "id")Long id) {
+        return service.returnById(id);
     }
 
 }

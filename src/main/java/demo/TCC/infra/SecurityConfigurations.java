@@ -29,10 +29,10 @@ public class SecurityConfigurations {
                         //Requisições user-
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/user/update").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/user/delete").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/id").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/user/update/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/user/delete/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/list").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/{id}").permitAll()
                         //Requisições local-
                         .requestMatchers(HttpMethod.POST, "/local/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/local/update/{id}").permitAll()
