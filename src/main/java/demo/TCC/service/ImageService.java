@@ -39,8 +39,8 @@ public class ImageService {
         return imageDTOS;
     }
 
-    public Image saveImage(Image image){
-        return repository.save(image);
+    public void saveImage(Image image){
+        repository.save(image);
     }
 
     public Image findById(Long id) {
@@ -60,7 +60,8 @@ public class ImageService {
         try {
             var imageData = file.getBytes();
             var local = findByIdLocal(id);
-            Image image = new Image(Base64.getEncoder().encode(imageData), local);
+            var imageBase64 = Base64.getEncoder().encode(imageData);
+            Image image = new Image(imageBase64, local);
             saveImage(image);
             return ResponseEntity.ok().body("Imagen Cadastrada");
         } catch (Exception e) {

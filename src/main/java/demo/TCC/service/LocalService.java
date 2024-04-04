@@ -27,29 +27,24 @@ public class LocalService {
         return localDTOS;
     }
 
-    //Salvando Local
     public void saveLocal(Local local) {
         repository.save(local);
     }
 
-    //Procurando por ID e retornando o DTO
     public LocalDTO findByLocalId(Long id) {
         var local = repository.findById(id).orElseThrow(() -> new RuntimeException("Local não encontrado"));
         return converte(local);
     }
 
-    //Procurando por ID
     public Local findById(Long id) {
         return repository.findById(id).orElseThrow(()-> new RuntimeException("Local não contrado"));
     }
 
-    //Deletando Local
     public void dellLocal(Long id) {
         var dellLocal = findById(id);
         repository.delete(dellLocal);
     }
 
-    //Atualizando o Local
     public void updateLocal(Long id, Local data){
         var local = findById(id);
         validate(data);
@@ -60,7 +55,6 @@ public class LocalService {
         repository.save(local);
     }
 
-    //Validando Campos que saõ necessarios editar
     private void validate(Local data) {
         if (Objects.isNull(data.getPrice()))
             throw new RuntimeException("Status é requirido");
@@ -70,7 +64,6 @@ public class LocalService {
             throw new RuntimeException("Status é requirido");
     }
 
-    //Convertendo entidade para LocalDTO (Response)
     public LocalDTO converte(Local local) {
         return LocalDTO.builder()
                 .id(local.getId())

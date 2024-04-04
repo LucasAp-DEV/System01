@@ -6,8 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
-public interface UserEntityRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     UserDetails findByLogin(String login);
-    Optional<User> findById(Long id);
+
+//    Optional<User> findById(Long id);
 }

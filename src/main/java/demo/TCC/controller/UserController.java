@@ -2,9 +2,12 @@ package demo.TCC.controller;
 
 import demo.TCC.domain.user.*;
 import demo.TCC.infra.TokenService;
-import demo.TCC.repository.UserEntityRepository;
+import demo.TCC.repository.UserRepository;
+import demo.TCC.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,34 +23,31 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UserEntityRepository repository;
+    private UserRepository repository;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private UserService service;
 
     @PostMapping("/login")
-    public ResponseEntity loginUser(@RequestBody @Valid AuthenticationDTO data){
+    public ResponseEntity<?> loginUser(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
-    public ResponseEntity registerUser(@RequestBody @Valid RegisterUserDTO data) {
-        if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();//VERIFICANDO SE EXISTE UM LOGIN NO BANCO
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); //Criptografando a senha
-        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telephone(), data.cidadeId()); //Salando as credenciais Usuario no banco
-
-        this.repository.save(newUser);
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> registerUser(@RequestBody @Valid RegisterUserDTO data) {
+        if (service.returnName(data.login()) != null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nome de usuario em uso");
+        service.saveUser(data);
+        return ResponseEntity.status(HttpStatus.OK).body("Usuario Cadastrado");
     }
 
     @PutMapping("/update")
-    public ResponseEntity updatLocal(@RequestBody UpdateUserDTO data) {
+    public ResponseEntity<?> updatLocal(@RequestBody UpdateUserDTO data) {
         User updatUser = repository.getReferenceById(data.id());
 
         if (data.nome() != null) {updatUser.setNome(data.nome());}
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity deletUser(@RequestBody UpdateUserDTO data) {
+    public ResponseEntity<?> deletUser(@RequestBody UpdateUserDTO data) {
         User updatUser = repository.getReferenceById(data.id());
 
         this.repository.delete(updatUser);
@@ -71,13 +71,13 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity getAllUsers() {
+    public ResponseEntity<?> getAllUsers() {
         List<UserResponseDTO> userList = this.repository.findAll().stream().map(UserResponseDTO::new).toList();
         return ResponseEntity.ok(userList);
     }
 
     @GetMapping("/id")
-    public ResponseEntity getByIdUser(@RequestBody UpdateUserDTO data) {
+    public ResponseEntity<?> getByIdUser(@RequestBody UpdateUserDTO data) {
         User getUser = repository.getReferenceById(data.id());
 
         UserResponseDTO userOptional = new UserResponseDTO(getUser);
