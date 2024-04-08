@@ -41,14 +41,13 @@ public class User implements UserDetails {
     @JoinColumn(name = "cidadeId", referencedColumnName = "id")
     private Cidade cidade;
 
-    public User(String login, String password, UserRole role, String nome, String email, String telephone, Cidade cidade){
+    public User(String login, String password, UserRole role, String nome, String email, String telephone){
         this.login = login;
         this.password = password;
         this.role = role;
         this.nome = nome;
         this.email = email;
         this.telephone = telephone;
-        this.cidade = cidade;
     }
 
     @Override
@@ -56,10 +55,14 @@ public class User implements UserDetails {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
     @Override
     public String getUsername() {
-        return login;
+        return "";
     }
 
     @Override

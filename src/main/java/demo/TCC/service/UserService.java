@@ -37,7 +37,7 @@ public class UserService {
         if (returnName(data.login()) != null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nome de usuario em uso");
         var encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telephone(), data.cidadeId());
+        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telephone());
         repository.save(newUser);
         return ResponseEntity.status(HttpStatus.OK).body("Usuario Cadastrado");
     }
