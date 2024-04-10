@@ -6,9 +6,8 @@ import demo.TCC.repository.LocalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class LocalService {
@@ -60,12 +59,19 @@ public class LocalService {
     }
 
     public LocalDTO converte(Local local) {
+        List<byte[]> imageBytesList = new ArrayList<>();
+        if (local.getImages() != null && !local.getImages().isEmpty()) {
+            byte[] firstImageBytes = Base64.getEncoder().encode(local.getImages().get(0).getImage());
+            imageBytesList.add(firstImageBytes);
+        }
+
         return LocalDTO.builder()
                 .id(local.getId())
                 .price(local.getPrice())
                 .descricao(local.getDescricao())
                 .endereco(local.getEndereco())
-                .userId(local.getUser().getId())
+                .userName(local.getUser().getNome())
+                .images(imageBytesList)
                 .build();
     }
 }
