@@ -1,5 +1,6 @@
 package demo.TCC.domain.cidade;
 
+import demo.TCC.domain.local.Local;
 import demo.TCC.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -28,12 +29,8 @@ public class Cidade {
     @OneToMany(mappedBy = "cidade")
     private List<User> users = new ArrayList<>();
 
-//    @Override
-//    public String toString() {
-//        return "Cidade{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", users=" + users +
-//                '}';
-//    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "cidade")
+    private List<Local> local = new ArrayList<>();
+
 }

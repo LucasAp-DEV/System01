@@ -1,5 +1,6 @@
 package demo.TCC.domain.local;
 
+import demo.TCC.domain.cidade.Cidade;
 import demo.TCC.domain.image.Image;
 import demo.TCC.domain.user.User;
 import demo.TCC.domain.contrato.Contrato;
@@ -30,6 +31,10 @@ public class Local {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "cidade_id", referencedColumnName = "id")
+    private Cidade cidade;
+
     @JsonIgnore
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Contrato> contratos = new ArrayList<>();
@@ -37,11 +42,4 @@ public class Local {
     @JsonIgnore
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
-
-    public Local(String descricao, Integer price, User user, String endereco) {
-        this.descricao = descricao;
-        this.price = price;
-        this.user = user;
-        this.endereco = endereco;
-    }
 }
