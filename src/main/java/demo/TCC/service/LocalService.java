@@ -71,7 +71,8 @@ public class LocalService {
                 .descricao(local.getDescricao())
                 .endereco(local.getEndereco())
                 .userName(local.getUser().getNome())
-                .cidade(local.getCidade().getName())
+                .userId(local.getUser().getId())
+                .userTell(local.getUser().getTelephone())
                 .images(imageBytesList)
                 .build();
     }

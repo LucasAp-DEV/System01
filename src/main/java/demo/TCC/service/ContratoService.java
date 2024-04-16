@@ -22,11 +22,10 @@ public class ContratoService {
         List<ContratoDTO> contratosDTO = new ArrayList<>();
         for (Contrato contrato : contratos) {
             ContratoDTO contratoDTO = new ContratoDTO(
-                    contrato.getDescricao(),
                     contrato.getData(),
                     contrato.getStatus(),
                     contrato.getLocal().getId(),
-                    contrato.getUser().getNome()
+                    contrato.getLocador().getNome()
             );
             contratosDTO.add(contratoDTO);
         }
@@ -44,20 +43,16 @@ public class ContratoService {
     public ResponseEntity<String> updateById(Long id, Contrato data) {
         var contrato = returnId(id);
         validate(data);
-        contrato.setDescricao(data.getDescricao());
         contrato.setStatus(data.getStatus());
         contrato.setData(data.getData());
         contrato.setLocal(data.getLocal());
-        contrato.setUser(data.getUser());
         repository.save(contrato);
         return ResponseEntity.status(HttpStatus.OK).body("Update Realizado");
     }
 
     private void validate(Contrato data) {
         if (Objects.isNull(data.getStatus())) throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getDescricao())) throw new RuntimeException("Status é requirido");
         if (Objects.isNull(data.getData())) throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getUser())) throw new RuntimeException("Status é requirido");
         if (Objects.isNull(data.getLocal())) throw new RuntimeException("Status é requirido");
     }
 }
