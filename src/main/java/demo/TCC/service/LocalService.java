@@ -70,9 +70,9 @@ public class LocalService {
                 .price(local.getPrice())
                 .descricao(local.getDescricao())
                 .endereco(local.getEndereco())
-                .userName(local.getUser().getNome())
-                .userId(local.getUser().getId())
-                .userTell(local.getUser().getTelephone())
+                .locatarioName(local.getLocatario().getNome())
+                .locatarioId(local.getLocatario().getId())
+                .locatarioTell(local.getLocatario().getTelephone())
                 .images(imageBytesList)
                 .build();
     }

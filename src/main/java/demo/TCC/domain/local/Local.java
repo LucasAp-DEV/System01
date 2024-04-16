@@ -28,8 +28,8 @@ public class Local {
     private Integer price;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "locatario_id", referencedColumnName = "id")
+    private User locatario;
 
     @ManyToOne
     @JoinColumn(name = "cidade_id", referencedColumnName = "id")

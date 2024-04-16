@@ -22,6 +22,11 @@ public class ContratoController {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
     }
 
+    @GetMapping("/locador/{id}")
+    public List<ContratoDTO> getContratosByLocador(@PathVariable(value = "id") Long Id) {
+        return service.returnByLocador(Id);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> registerContrato(@RequestBody @Valid Contrato data) {
         service.saveContrato(data);

@@ -2,6 +2,7 @@ package demo.TCC.service;
 
 import demo.TCC.domain.contrato.ContratoDTO;
 import demo.TCC.domain.contrato.Contrato;
+import demo.TCC.domain.user.User;
 import demo.TCC.repository.ContratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,16 +22,21 @@ public class ContratoService {
         List<Contrato> contratos = repository.findAll();
         List<ContratoDTO> contratosDTO = new ArrayList<>();
         for (Contrato contrato : contratos) {
-            ContratoDTO contratoDTO = new ContratoDTO(
-                    contrato.getData(),
-                    contrato.getStatus(),
-                    contrato.getLocal().getId(),
-                    contrato.getLocador().getNome()
-            );
-            contratosDTO.add(contratoDTO);
+            if (contrato != null && contrato.getLocador() != null) {
+                ContratoDTO contratoDTO = new ContratoDTO(
+                        contrato.getId(),
+                        contrato.getData(),
+                        contrato.getStatus(),
+                        contrato.getLocal().getId(),
+                        contrato.getLocador().getNome(),
+                        contrato.getLocatario().getNome()
+                );
+                contratosDTO.add(contratoDTO);
+            }
         }
         return contratosDTO;
     }
+
 
     public Contrato saveContrato(Contrato contrato) {
         return repository.save(contrato);
@@ -55,6 +61,27 @@ public class ContratoService {
         if (Objects.isNull(data.getData())) throw new RuntimeException("Status é requirido");
         if (Objects.isNull(data.getLocal())) throw new RuntimeException("Status é requirido");
     }
+
+    public List<ContratoDTO> returnByLocador(Long locadorId) {
+        List<Contrato> contratos = repository.findAllByLocadorId(locadorId);
+        List<ContratoDTO> contratosDTO = new ArrayList<>();
+        for (Contrato contrato : contratos) {
+            if (contrato != null) {
+                ContratoDTO contratoDTO = new ContratoDTO(
+                        contrato.getId(),
+                        contrato.getData(),
+                        contrato.getStatus(),
+                        contrato.getLocal().getId(),
+                        contrato.getLocador().getNome(),
+                        contrato.getLocatario().getNome()
+                );
+                contratosDTO.add(contratoDTO);
+            }
+        }
+        return contratosDTO;
+    }
+
+
 }
 
 

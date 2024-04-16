@@ -87,7 +87,6 @@ public class UserService {
                 .telephone(user.getTelephone())
                 .id(user.getId())
                 .role(user.getRole())
-                .cidade(user.getCidade().getName())
                 .build();
     }
 
