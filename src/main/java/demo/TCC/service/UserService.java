@@ -1,7 +1,9 @@
 package demo.TCC.service;
 
+import demo.TCC.domain.cidade.Cidade;
 import demo.TCC.domain.user.*;
 import demo.TCC.infra.TokenService;
+import demo.TCC.repository.CidadeRepository;
 import demo.TCC.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,8 @@ public class UserService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
     public ResponseEntity<LoginResponseDTO> loginUser(AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
@@ -69,30 +73,35 @@ public class UserService {
         return userResponseDTOS;
     }
 
-    public void updateDTO(Long id, User data) { //Inserir Mudar cidade.
+    public void updateDTO(Long id, User data) {
         var userID = findById(id);
-        validate(data);
+        userID.setLogin(data.getLogin());
         userID.setNome(data.getNome());
         userID.setEmail(data.getEmail());
         userID.setTelephone(data.getTelephone());
+        userID.setRole(data.getRole());
 
         repository.save(userID);
     }
 
+
+
+
     public UserResponseDTO convertDTO(User user) {
-        return UserResponseDTO.builder()
+        UserResponseDTO.UserResponseDTOBuilder builder = UserResponseDTO.builder()
                 .login(user.getLogin())
                 .email(user.getEmail())
                 .nome(user.getNome())
                 .telephone(user.getTelephone())
                 .id(user.getId())
-                .role(user.getRole())
-                .build();
-    }
+                .role(user.getRole());
 
-    private void validate(User data) {
-        if (Objects.isNull(data.getNome())) throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getEmail())) throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getTelephone())) throw new RuntimeException("Status é requirido");
+        if (user.getCidade() != null) {
+            builder.cidade(user.getCidade().getName());
+        } else {
+            builder.cidade(null);
+        }
+
+        return builder.build();
     }
 }
