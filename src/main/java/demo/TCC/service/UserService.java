@@ -1,9 +1,7 @@
 package demo.TCC.service;
 
-import demo.TCC.domain.cidade.Cidade;
 import demo.TCC.domain.user.*;
 import demo.TCC.infra.TokenService;
-import demo.TCC.repository.CidadeRepository;
 import demo.TCC.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class UserService {
@@ -27,8 +24,6 @@ public class UserService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private TokenService tokenService;
-    @Autowired
-    private CidadeRepository cidadeRepository;
 
     public ResponseEntity<LoginResponseDTO> loginUser(AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
@@ -84,9 +79,6 @@ public class UserService {
         repository.save(userID);
     }
 
-
-
-
     public UserResponseDTO convertDTO(User user) {
         UserResponseDTO.UserResponseDTOBuilder builder = UserResponseDTO.builder()
                 .login(user.getLogin())
@@ -95,13 +87,6 @@ public class UserService {
                 .telephone(user.getTelephone())
                 .id(user.getId())
                 .role(user.getRole());
-
-        if (user.getCidade() != null) {
-            builder.cidade(user.getCidade().getName());
-        } else {
-            builder.cidade(null);
-        }
-
-        return builder.build();
+                return builder.build();
     }
 }

@@ -37,10 +37,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "locatario", cascade = CascadeType.ALL)
     private List<Local> locais = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "cidadeId", referencedColumnName = "id")
-    private Cidade cidade;
-
     public User(String login, String password, UserRole role, String nome, String email, String telephone){
         this.login = login;
         this.password = password;
