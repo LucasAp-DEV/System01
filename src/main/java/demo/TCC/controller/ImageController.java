@@ -1,7 +1,9 @@
 package demo.TCC.controller;
 
+import demo.TCC.domain.image.RegisterImageDTO;
 import demo.TCC.service.ImageService;
 import demo.TCC.domain.image.ImageDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,9 @@ public class ImageController {
     private ImageService service;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerImage(@RequestParam("images") String base64Image, @RequestParam("localId") Long id) {
-        return service.saveImage2(base64Image, id);
+    public ResponseEntity<String> registerImage(@RequestBody RegisterImageDTO data) {
+        service.saveImage2(data);
+        return ResponseEntity.status(HttpStatus.OK).body("Imagen Salva");
     }
 
     @DeleteMapping("/delete/{id}")

@@ -2,6 +2,7 @@ package demo.TCC.service;
 
 import demo.TCC.domain.image.Image;
 import demo.TCC.domain.image.ImageDTO;
+import demo.TCC.domain.image.RegisterImageDTO;
 import demo.TCC.domain.local.Local;
 import demo.TCC.repository.ImageRepository;
 import demo.TCC.repository.LocalRepository;
@@ -56,16 +57,18 @@ public class ImageService {
         repository.delete(image);
     }
 
-    public ResponseEntity<String> saveImage2(String base64Image, Long id) {
+    public ResponseEntity<String> saveImage2(RegisterImageDTO data) {
         try {
-            byte[] imageData = Base64.getDecoder().decode(base64Image);
-            var local = findByIdLocal(id);
+            byte[] imageData = Base64.getDecoder().decode(data.images());
+            Long localId = data.localId();
+            Local local = findByIdLocal(localId);
             Image image = new Image(imageData, local);
             repository.save(image);
-
             return ResponseEntity.ok().body("Imagem Cadastrada");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagem Não Cadastrada");
         }
     }
+
+
 }

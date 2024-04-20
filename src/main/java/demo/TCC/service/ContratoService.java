@@ -18,6 +18,7 @@ public class ContratoService {
     @Autowired
     private ContratoRepository repository;
 
+    //Mudar para buscar por uma lista de ID
     public List<ContratoDTO> returnall() {
         List<Contrato> contratos = repository.findAll();
         List<ContratoDTO> contratosDTO = new ArrayList<>();
