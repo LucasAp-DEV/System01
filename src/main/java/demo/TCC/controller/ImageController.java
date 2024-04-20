@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class ImageController {
     private ImageService service;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerImage(@RequestParam("file") MultipartFile file, @RequestParam("localId") Long id) {
-        return service.saveImage2(file, id);
+    public ResponseEntity<String> registerImage(@RequestParam("images") String base64Image, @RequestParam("localId") Long id) {
+        return service.saveImage2(base64Image, id);
     }
 
     @DeleteMapping("/delete/{id}")

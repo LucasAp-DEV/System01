@@ -56,16 +56,16 @@ public class ImageService {
         repository.delete(image);
     }
 
-    public ResponseEntity<String> saveImage2(MultipartFile file, Long id) {
+    public ResponseEntity<String> saveImage2(String base64Image, Long id) {
         try {
-            var imageData = file.getBytes();
+            byte[] imageData = Base64.getDecoder().decode(base64Image);
             var local = findByIdLocal(id);
-            var imageBase64 = Base64.getEncoder().encode(imageData);
-            Image image = new Image(imageBase64, local);
-            saveImage(image);
-            return ResponseEntity.ok().body("Imagen Cadastrada");
+            Image image = new Image(imageData, local);
+            repository.save(image);
+
+            return ResponseEntity.ok().body("Imagem Cadastrada");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagen Não Cadastrada");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagem Não Cadastrada");
         }
     }
 }
