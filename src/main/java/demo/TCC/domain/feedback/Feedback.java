@@ -22,11 +22,4 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "contratoId", referencedColumnName = "id")
     private Contrato contrato;
-
-
-    public Feedback(String descricao, int nota, Contrato contrato) {
-        this.descricao = descricao;
-        this.nota = nota;
-        this.contrato = contrato;
-    }
 }

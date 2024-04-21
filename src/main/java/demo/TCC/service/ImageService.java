@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -59,14 +59,15 @@ public class ImageService {
 
     public ResponseEntity<String> saveImage2(RegisterImageDTO data) {
         try {
-            byte[] imageData = Base64.getDecoder().decode(data.images());
+            byte[] imageData = Base64.getDecoder().decode(data.images()); //Problema aqui
+            System.out.println("Foi codificado");
             Long localId = data.localId();
             Local local = findByIdLocal(localId);
             Image image = new Image(imageData, local);
             repository.save(image);
             return ResponseEntity.ok().body("Imagem Cadastrada");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Imagem Não Cadastrada");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(data.images());
         }
     }
 

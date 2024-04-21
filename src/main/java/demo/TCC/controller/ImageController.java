@@ -21,8 +21,7 @@ public class ImageController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerImage(@RequestBody RegisterImageDTO data) {
-        service.saveImage2(data);
-        return ResponseEntity.status(HttpStatus.OK).body("Imagen Salva");
+       return service.saveImage2(data);
     }
 
     @DeleteMapping("/delete/{id}")
