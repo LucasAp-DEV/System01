@@ -38,7 +38,6 @@ public class Contrato {
     @JoinColumn(name = "local_id", referencedColumnName = "id")
     private Local local;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "contrato", cascade = CascadeType.ALL)
     private List<Feedback> feedbacks = new ArrayList<>();
 

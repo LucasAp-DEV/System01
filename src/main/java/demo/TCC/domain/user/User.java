@@ -33,7 +33,6 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "locatario", cascade = CascadeType.ALL)
     private List<Local> locais = new ArrayList<>();
 

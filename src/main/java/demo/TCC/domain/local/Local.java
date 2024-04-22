@@ -35,11 +35,9 @@ public class Local {
     @JoinColumn(name = "cidade_id", referencedColumnName = "id")
     private Cidade cidade;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Contrato> contratos = new ArrayList<>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
 }

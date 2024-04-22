@@ -25,7 +25,6 @@ public class Cidade {
     private Long id;
     private String name;
 
-//    @JsonIgnore
     @OneToMany(mappedBy = "cidade")
     private List<Local> local = new ArrayList<>();
 

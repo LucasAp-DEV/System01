@@ -59,8 +59,8 @@ public class ImageService {
 
     public ResponseEntity<String> saveImage2(RegisterImageDTO data) {
         try {
-            byte[] imageData = Base64.getDecoder().decode(data.images()); //Problema aqui
-            System.out.println("Foi codificado");
+            String base64WithoutPrefix = data.images().replaceFirst("data:image\\/[^;]+;base64,", "");
+            byte[] imageData = Base64.getDecoder().decode(base64WithoutPrefix);
             Long localId = data.localId();
             Local local = findByIdLocal(localId);
             Image image = new Image(imageData, local);
@@ -70,6 +70,5 @@ public class ImageService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(data.images());
         }
     }
-
 
 }

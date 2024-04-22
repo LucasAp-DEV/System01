@@ -3,7 +3,6 @@ package demo.TCC.controller;
 import demo.TCC.domain.image.RegisterImageDTO;
 import demo.TCC.service.ImageService;
 import demo.TCC.domain.image.ImageDTO;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
