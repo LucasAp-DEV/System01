@@ -59,7 +59,7 @@ public class ImageService {
 
     public ResponseEntity<String> saveImage2(RegisterImageDTO data) {
         try {
-            String base64WithoutPrefix = data.images().replaceFirst("data:image\\/[^;]+;base64,", "");
+            String base64WithoutPrefix = data.images().replaceFirst("data:image/[^;]+;base64,", "");
             byte[] imageData = Base64.getDecoder().decode(base64WithoutPrefix);
             Long localId = data.localId();
             Local local = findByIdLocal(localId);
