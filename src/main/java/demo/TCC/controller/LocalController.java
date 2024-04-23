@@ -36,7 +36,7 @@ public class LocalController {
         return ResponseEntity.status(HttpStatus.OK).body("Local Deletado");
     }
 
-    @GetMapping("/list") //Inserir Imagen
+    @GetMapping("/list")
     public ResponseEntity<List<LocalDTO>> getAllLocal() {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
     }

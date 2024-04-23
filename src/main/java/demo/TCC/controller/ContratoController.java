@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("contrato")
 public class ContratoController {
+
     @Autowired
     private ContratoService service;
 

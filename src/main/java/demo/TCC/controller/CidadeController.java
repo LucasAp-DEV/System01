@@ -32,19 +32,4 @@ public class CidadeController {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
     }
 
-
-//    @PutMapping("/update")
-//    public ResponseEntity<String> updateCidade(@RequestBody @Valid UpdatecidadeDTO data) {
-//        var upadteCidade = repository.findById(data.id()).orElseThrow(()-> new RuntimeException("Cidade não encontrada")); //Verificar nos outros consoles.
-//
-////        if(optionalCidade.isEmpty())
-////        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cidade não encontrada");
-////        Cidade upadteCidade = repository.getReferenceById(data.id());
-//
-//        if(data.name() != null) {upadteCidade.setName(data.name());}
-//        this.repository.save(upadteCidade);
-//
-//        return ResponseEntity.status(HttpStatus.OK).body("Cidade Atualizada");
-//    }
-
 }

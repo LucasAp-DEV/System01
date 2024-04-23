@@ -16,8 +16,8 @@ public class CidadeService {
         return getrepository.findAll();
     }
 
-    public Cidade saveCidade (Cidade cidade) {
-        return getrepository.save(cidade);
+    public void saveCidade (Cidade cidade) {
+        getrepository.save(cidade);
     }
 
     public Cidade returnName(String name) {
@@ -25,3 +25,4 @@ public class CidadeService {
     }
 
 }
+

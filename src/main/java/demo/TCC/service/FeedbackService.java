@@ -17,8 +17,8 @@ public class FeedbackService {
         return repository.findAll();
     }
 
-    public Feedback saveFeedback(Feedback feedback) {
-        return repository.save(feedback);
+    public void saveFeedback(Feedback feedback) {
+        repository.save(feedback);
     }
 
     public Feedback returnId(Long id) {

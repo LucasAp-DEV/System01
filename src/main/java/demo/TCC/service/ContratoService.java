@@ -2,7 +2,6 @@ package demo.TCC.service;
 
 import demo.TCC.domain.contrato.ContratoDTO;
 import demo.TCC.domain.contrato.Contrato;
-import demo.TCC.domain.user.User;
 import demo.TCC.repository.ContratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,8 +38,8 @@ public class ContratoService {
     }
 
 
-    public Contrato saveContrato(Contrato contrato) {
-        return repository.save(contrato);
+    public void saveContrato(Contrato contrato) {
+        repository.save(contrato);
     }
 
     public Contrato returnId(Long id) {

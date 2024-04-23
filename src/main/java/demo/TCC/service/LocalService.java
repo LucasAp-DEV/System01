@@ -61,10 +61,9 @@ public class LocalService {
     public LocalDTO converte(Local local) {
         List<byte[]> imageBytesList = new ArrayList<>();
         if (local.getImages() != null && !local.getImages().isEmpty()) {
-            byte[] firstImageBytes = local.getImages().get(0).getImage();
+            byte[] firstImageBytes = local.getImages().getFirst().getImage();
             imageBytesList.add(firstImageBytes);
         }
-
         return LocalDTO.builder()
                 .id(local.getId())
                 .price(local.getPrice())
