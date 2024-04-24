@@ -25,7 +25,4 @@ public class Cidade {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "cidade")
-    private List<Local> local = new ArrayList<>();
-
 }
