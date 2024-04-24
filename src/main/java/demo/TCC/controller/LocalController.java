@@ -19,9 +19,9 @@ public class LocalController {
     private LocalService service;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerLocal(@RequestBody @Valid Local local) {
-        service.saveLocal(local);
-        return ResponseEntity.status(HttpStatus.OK).body("Local Registrado");
+    public ResponseEntity<Long> registerLocal(@RequestBody @Valid Local local) {
+        Long localId = service.saveLocal(local);
+        return ResponseEntity.status(HttpStatus.OK).body(localId);
     }
 
     @PutMapping("/update/{id}")

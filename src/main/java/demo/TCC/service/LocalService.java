@@ -25,8 +25,9 @@ public class LocalService {
         return localDTOS;
     }
 
-    public void saveLocal(Local local) {
-        repository.save(local);
+    public Long saveLocal(Local local) {
+        Local savedLocal = repository.save(local);
+        return savedLocal.getId();
     }
 
     public LocalDTO findByLocalId(Long id) {
