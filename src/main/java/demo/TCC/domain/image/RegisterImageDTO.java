@@ -1,4 +1,6 @@
 package demo.TCC.domain.image;
 
-public record RegisterImageDTO(String images, Long localId) {
+import java.util.List;
+
+public record RegisterImageDTO(List<String> images, Long localId) {
 }

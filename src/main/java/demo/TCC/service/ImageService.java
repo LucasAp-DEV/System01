@@ -59,16 +59,19 @@ public class ImageService {
 
     public ResponseEntity<String> saveImage2(RegisterImageDTO data) {
         try {
-            String base64WithoutPrefix = data.images().replaceFirst("data:image/[^;]+;base64,", "");
-            byte[] imageData = Base64.getDecoder().decode(base64WithoutPrefix);
             Long localId = data.localId();
             Local local = findByIdLocal(localId);
-            Image image = new Image(imageData, local);
-            repository.save(image);
-            return ResponseEntity.ok().body("Imagem Cadastrada");
+
+            data.images().forEach(imageData->{
+                String base64Image = imageData.replaceFirst("data:image/[^;]+;base64,", "");
+                byte[] imageDataBytes = Base64.getDecoder().decode(base64Image);
+                repository.save(new Image(imageDataBytes, local));
+            });
+            return ResponseEntity.ok().body("Imagens Cadastradas");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(data.images());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar imagens");
         }
     }
+
 
 }
