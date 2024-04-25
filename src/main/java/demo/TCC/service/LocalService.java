@@ -73,6 +73,7 @@ public class LocalService {
                 .locatarioName(local.getLocatario().getNome())
                 .locatarioId(local.getLocatario().getId())
                 .locatarioTell(local.getLocatario().getTelephone())
+                .cidade(local.getCidade().getName())
                 .images(imageBytesList)
                 .build();
     }

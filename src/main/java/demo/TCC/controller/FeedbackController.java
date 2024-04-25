@@ -19,7 +19,7 @@ public class FeedbackController {
 
     @GetMapping("/list")
     public ResponseEntity<List<Feedback>> returnall() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnAll()); //erro
     }
 
     @PostMapping("/register")
