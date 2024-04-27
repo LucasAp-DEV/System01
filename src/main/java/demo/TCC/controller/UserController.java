@@ -35,9 +35,8 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updatLocal(@PathVariable(value = "id") Long id, @RequestBody @Valid User data) {
-        service.updateDTO(id, data);
-        return ResponseEntity.status(HttpStatus.OK).body("Atualizado com Sucesso");
+    public ResponseEntity<?> updatLocal(@PathVariable(value = "id") Long id, @RequestBody @Valid User data) {
+        return service.updateDTO(id, data);
     }
 
     @DeleteMapping("/delete/{id}")

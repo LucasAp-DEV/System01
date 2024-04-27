@@ -68,15 +68,19 @@ public class UserService {
         return userResponseDTOS;
     }
 
-    public void updateDTO(Long id, User data) {
+    public ResponseEntity<LoginResponseDTO> updateDTO(Long id, User user) {
         var userID = findById(id);
-        userID.setLogin(data.getLogin());
-        userID.setNome(data.getNome());
-        userID.setEmail(data.getEmail());
-        userID.setTelephone(data.getTelephone());
-        userID.setRole(data.getRole());
+        userID.setLogin(user.getLogin());
+        userID.setNome(user.getNome());
+        userID.setEmail(user.getEmail());
+        userID.setTelephone(user.getTelephone());
+        userID.setRole(user.getRole());
 
         repository.save(userID);
+        var usernamePassword = new UsernamePasswordAuthenticationToken(user.getLogin(), user.getPassword());
+        var authenticate = this.authenticationManager.authenticate(usernamePassword);
+        var token = tokenService.generateToken((User) authenticate.getPrincipal());
+        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(token));
     }
 
     public UserResponseDTO convertDTO(User user) {

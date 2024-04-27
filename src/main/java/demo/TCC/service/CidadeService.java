@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class CidadeService {
+
     @Autowired
     private CidadeRepository getrepository;
 
