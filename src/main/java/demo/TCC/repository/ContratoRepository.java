@@ -7,5 +7,9 @@ import java.util.List;
 
 public interface ContratoRepository extends JpaRepository<Contrato, Long> {
 
-    List<Contrato> findAllByLocadorId(Long locadorId);
+    List<Contrato> findByLocatarioId(Long locatario);
+
+    List<Contrato> findByLocadorId(Long locador);
+
 }
+

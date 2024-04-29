@@ -23,9 +23,9 @@ public class ContratoController {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
     }
 
-    @GetMapping("/locador/{id}")
-    public List<ContratoDTO> getContratosByLocador(@PathVariable(value = "id") Long Id) {
-        return service.returnByLocador(Id);
+    @GetMapping("/user/{id}")
+    public List<ContratoDTO> getContratosByLocatarioOuLocador(@PathVariable(value = "id") Long Id) {
+        return service.returnByLocatarioOuLocador(Id);
     }
 
     @PostMapping("/register")

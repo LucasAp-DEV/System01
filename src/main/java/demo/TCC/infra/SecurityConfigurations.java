@@ -44,7 +44,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.PUT, "/contrato/update/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/contrato/delete").permitAll()
                         .requestMatchers(HttpMethod.GET, "/contrato/list").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/contrato/locador/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/contrato/user/{id}").permitAll()
                         //Requisições cidade-
                         .requestMatchers(HttpMethod.POST, "/cidade/register").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/cidade/delete").permitAll()
