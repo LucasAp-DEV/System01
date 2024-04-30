@@ -29,7 +29,10 @@ public class ContratoService {
                         contrato.getLocal().getId(),
                         contrato.getLocador().getNome(),
                         contrato.getLocatario().getNome(),
-                        contrato.getLocal().getPrice()
+                        contrato.getLocatario().getTelephone(),
+                        contrato.getLocal().getPrice(),
+                        contrato.getLocal().getEndereco(),
+                        contrato.getLocal().getCidade().getName()
                 );
                 contratosDTO.add(contratoDTO);
             }
@@ -76,7 +79,10 @@ public class ContratoService {
                         contrato.getLocal().getId(),
                         contrato.getLocador().getNome(),
                         contrato.getLocatario().getNome(),
-                        contrato.getLocal().getPrice()
+                        contrato.getLocatario().getTelephone(),
+                        contrato.getLocal().getPrice(),
+                        contrato.getLocal().getEndereco(),
+                        contrato.getLocal().getCidade().getName()
                 );
                 contratosDTO.add(contratoDTO);
             }
@@ -90,7 +96,10 @@ public class ContratoService {
                         contrato.getLocal().getId(),
                         contrato.getLocador().getNome(),
                         contrato.getLocatario().getNome(),
-                        contrato.getLocal().getPrice()
+                        contrato.getLocatario().getTelephone(),
+                        contrato.getLocal().getPrice(),
+                        contrato.getLocal().getEndereco(),
+                        contrato.getLocal().getCidade().getName()
                 );
                 contratosDTO.add(contratoDTO);
             }
