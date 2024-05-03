@@ -41,7 +41,7 @@ public class LocalController {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
     }
 
-    @GetMapping("/list/{id}") //Inserir Imagen e verificar
+    @GetMapping("/{id}") //Inserir Imagen e verificar
     public ResponseEntity<?> getByIdLocal(@PathVariable(value = "id")Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByLocalId(id));
     }

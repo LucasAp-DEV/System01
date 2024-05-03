@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class ContratoService {
+
     @Autowired
     private ContratoRepository repository;
 
@@ -49,12 +50,30 @@ public class ContratoService {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Contrato não Encontrado"));
     }
 
+    public ContratoDTO findByUserId(Long id) {
+        var contrato = returnId(id);
+        return converte(contrato);
+    }
+
+    public ContratoDTO converte(Contrato contrato) {
+        return ContratoDTO.builder()
+                .id(contrato.getId())
+                .data(contrato.getData())
+                .status(contrato.getStatus())
+                .local(contrato.getLocal().getId())
+                .locador(contrato.getLocador().getNome())
+                .locatario(contrato.getLocatario().getNome())
+                .telephone(contrato.getLocatario().getTelephone())
+                .price(contrato.getLocal().getPrice())
+                .endereco(contrato.getLocal().getEndereco())
+                .cidade(contrato.getLocal().getCidade().getName())
+                .build();
+    }
+
     public ResponseEntity<String> updateById(Long id, Contrato data) {
         var contrato = returnId(id);
 //        validate(data);
         contrato.setStatus(data.getStatus());
-        contrato.setData(data.getData());
-        contrato.setLocal(data.getLocal());
         repository.save(contrato);
         return ResponseEntity.status(HttpStatus.OK).body("Update Realizado");
     }
@@ -106,9 +125,6 @@ public class ContratoService {
         }
         return contratosDTO;
     }
-
-
-
 
 }
 

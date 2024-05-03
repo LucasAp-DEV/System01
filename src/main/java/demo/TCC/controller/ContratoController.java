@@ -28,6 +28,11 @@ public class ContratoController {
         return service.returnByLocatarioOuLocador(Id);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ContratoDTO> getByContratosById(@PathVariable(value = "id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.findByUserId(id));
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> registerContrato(@RequestBody @Valid Contrato data) {
         service.saveContrato(data);
