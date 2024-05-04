@@ -2,6 +2,7 @@ package demo.TCC.controller;
 
 import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.contrato.ContratoDTO;
+import demo.TCC.domain.contrato.UpdateContratoDTO;
 import demo.TCC.service.ContratoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class ContratoController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateContrato(@PathVariable(value = "id") Long id, @RequestBody Contrato data) {
+    public ResponseEntity<String> updateContrato(@PathVariable(value = "id") Long id, @RequestBody UpdateContratoDTO data) {
         return service.updateById(id, data);
     }
 }

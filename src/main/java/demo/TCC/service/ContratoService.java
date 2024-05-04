@@ -2,6 +2,7 @@ package demo.TCC.service;
 
 import demo.TCC.domain.contrato.ContratoDTO;
 import demo.TCC.domain.contrato.Contrato;
+import demo.TCC.domain.contrato.UpdateContratoDTO;
 import demo.TCC.repository.ContratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -70,19 +71,12 @@ public class ContratoService {
                 .build();
     }
 
-    public ResponseEntity<String> updateById(Long id, Contrato data) {
+    public ResponseEntity<String> updateById(Long id, UpdateContratoDTO data) {
         var contrato = returnId(id);
-//        validate(data);
-        contrato.setStatus(data.getStatus());
+        contrato.setStatus(data.status());
         repository.save(contrato);
-        return ResponseEntity.status(HttpStatus.OK).body("Update Realizado");
+        return ResponseEntity.status(HttpStatus.OK).body("Contrato Salvo");
     }
-
-//    private void validate(Contrato data) {
-//        if (Objects.isNull(data.getStatus())) throw new RuntimeException("Status é requirido");
-//        if (Objects.isNull(data.getData())) throw new RuntimeException("Status é requirido");
-//        if (Objects.isNull(data.getLocal())) throw new RuntimeException("Status é requirido");
-//    }
 
     public List<ContratoDTO> returnByLocatarioOuLocador(Long userId) {
         List<Contrato> contratosLocatario = repository.findByLocatarioId(userId);
