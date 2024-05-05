@@ -36,7 +36,7 @@ public class UserService {
         if (returnName(data.login()) != null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nome de usuario em uso");
         var encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telephone());
+        User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telefone());
         repository.save(newUser);
         return ResponseEntity.status(HttpStatus.OK).body("Usuario Cadastrado");
     }
@@ -73,7 +73,7 @@ public class UserService {
         userID.setLogin(user.getLogin());
         userID.setNome(user.getNome());
         userID.setEmail(user.getEmail());
-        userID.setTelephone(user.getTelephone());
+        userID.setTelefone(user.getTelefone());
         userID.setRole(user.getRole());
 
         repository.save(userID);
@@ -88,7 +88,7 @@ public class UserService {
                 .login(user.getLogin())
                 .email(user.getEmail())
                 .nome(user.getNome())
-                .telephone(user.getTelephone())
+                .telefone(user.getTelefone())
                 .id(user.getId())
                 .role(user.getRole());
                 return builder.build();

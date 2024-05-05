@@ -72,7 +72,7 @@ public class LocalService {
                 .endereco(local.getEndereco())
                 .locatarioName(local.getLocatario().getNome())
                 .locatarioId(local.getLocatario().getId())
-                .locatarioTell(local.getLocatario().getTelephone())
+                .locatarioTell(local.getLocatario().getTelefone())
                 .cidade(local.getCidade().getName())
                 .images(imageBytesList)
                 .build();

@@ -28,7 +28,7 @@ public class User implements UserDetails {
     private String password;
     private String nome;
     private String email;
-    private String telephone;
+    private String telefone;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
@@ -36,13 +36,13 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "locatario", cascade = CascadeType.ALL)
     private List<Local> locais = new ArrayList<>();
 
-    public User(String login, String password, UserRole role, String nome, String email, String telephone){
+    public User(String login, String password, UserRole role, String nome, String email, String telefone){
         this.login = login;
         this.password = password;
         this.role = role;
         this.nome = nome;
         this.email = email;
-        this.telephone = telephone;
+        this.telefone = telefone;
     }
 
     @Override

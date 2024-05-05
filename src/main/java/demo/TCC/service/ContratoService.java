@@ -31,7 +31,7 @@ public class ContratoService {
                         contrato.getLocal().getId(),
                         contrato.getLocador().getNome(),
                         contrato.getLocatario().getNome(),
-                        contrato.getLocatario().getTelephone(),
+                        contrato.getLocatario().getTelefone(),
                         contrato.getLocal().getPrice(),
                         contrato.getLocal().getEndereco(),
                         contrato.getLocal().getCidade().getName()
@@ -64,7 +64,7 @@ public class ContratoService {
                 .local(contrato.getLocal().getId())
                 .locador(contrato.getLocador().getNome())
                 .locatario(contrato.getLocatario().getNome())
-                .telephone(contrato.getLocatario().getTelephone())
+                .telephone(contrato.getLocatario().getTelefone())
                 .price(contrato.getLocal().getPrice())
                 .endereco(contrato.getLocal().getEndereco())
                 .cidade(contrato.getLocal().getCidade().getName())
@@ -92,7 +92,7 @@ public class ContratoService {
                         contrato.getLocal().getId(),
                         contrato.getLocador().getNome(),
                         contrato.getLocatario().getNome(),
-                        contrato.getLocatario().getTelephone(),
+                        contrato.getLocatario().getTelefone(),
                         contrato.getLocal().getPrice(),
                         contrato.getLocal().getEndereco(),
                         contrato.getLocal().getCidade().getName()
@@ -109,7 +109,7 @@ public class ContratoService {
                         contrato.getLocal().getId(),
                         contrato.getLocador().getNome(),
                         contrato.getLocatario().getNome(),
-                        contrato.getLocatario().getTelephone(),
+                        contrato.getLocatario().getTelefone(),
                         contrato.getLocal().getPrice(),
                         contrato.getLocal().getEndereco(),
                         contrato.getLocal().getCidade().getName()
