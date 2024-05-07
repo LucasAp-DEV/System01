@@ -34,7 +34,9 @@ public class ContratoService {
                         contrato.getLocatario().getTelefone(),
                         contrato.getLocal().getPrice(),
                         contrato.getLocal().getEndereco(),
-                        contrato.getLocal().getCidade().getName()
+                        contrato.getLocal().getCidade().getName(),
+                        contrato.getLocador().getId(),
+                        contrato.getLocatario().getId()
                 );
                 contratosDTO.add(contratoDTO);
             }
@@ -63,7 +65,9 @@ public class ContratoService {
                 .status(contrato.getStatus())
                 .local(contrato.getLocal().getId())
                 .locador(contrato.getLocador().getNome())
+                .locadorId(contrato.getLocador().getId())
                 .locatario(contrato.getLocatario().getNome())
+                .locatarioId(contrato.getLocatario().getId())
                 .telephone(contrato.getLocatario().getTelefone())
                 .price(contrato.getLocal().getPrice())
                 .endereco(contrato.getLocal().getEndereco())
@@ -95,7 +99,9 @@ public class ContratoService {
                         contrato.getLocatario().getTelefone(),
                         contrato.getLocal().getPrice(),
                         contrato.getLocal().getEndereco(),
-                        contrato.getLocal().getCidade().getName()
+                        contrato.getLocal().getCidade().getName(),
+                        contrato.getLocador().getId(),
+                        contrato.getLocatario().getId()
                 );
                 contratosDTO.add(contratoDTO);
             }
@@ -112,7 +118,9 @@ public class ContratoService {
                         contrato.getLocatario().getTelefone(),
                         contrato.getLocal().getPrice(),
                         contrato.getLocal().getEndereco(),
-                        contrato.getLocal().getCidade().getName()
+                        contrato.getLocal().getCidade().getName(),
+                        contrato.getLocador().getId(),
+                        contrato.getLocatario().getId()
                 );
                 contratosDTO.add(contratoDTO);
             }
