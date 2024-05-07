@@ -1,8 +1,8 @@
 INSERT INTO usuario (login, password, nome, email, telefone, role)
 VALUES
-    ('lucas', '123', 'Lucas Aparecido', 'lucas@gmail.com', '44997574461', 'ADMIN'),
-    ('leonardo', '123', 'Leonardo Rorato', 'leonardo@gmail.com', '44997574585', 'ADMIN'),
-    ('ivan', '123', 'Ivan Rorato', 'ivan@gmail.com', '44997574695', 'USER');
+    ('lucas', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Lucas Aparecido', 'lucas@gmail.com', '44997574461', 'ADMIN'),
+    ('leonardo', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Leonardo Rorato', 'leonardo@gmail.com', '44997574585', 'ADMIN'),
+    ('ivan', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Ivan Rorato', 'ivan@gmail.com', '44997574695', 'USER');
 
 INSERT INTO cidade (name)
 VALUES
