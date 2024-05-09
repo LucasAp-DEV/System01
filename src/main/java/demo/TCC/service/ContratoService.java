@@ -18,31 +18,31 @@ public class ContratoService {
     @Autowired
     private ContratoRepository repository;
 
-    //Mudar para buscar por uma lista de ID
-    public List<ContratoDTO> returnall() {
-        List<Contrato> contratos = repository.findAll();
-        List<ContratoDTO> contratosDTO = new ArrayList<>();
-        for (Contrato contrato : contratos) {
-            if (contrato != null && contrato.getLocador() != null) {
-                ContratoDTO contratoDTO = new ContratoDTO(
-                        contrato.getId(),
-                        contrato.getData(),
-                        contrato.getStatus(),
-                        contrato.getLocal().getId(),
-                        contrato.getLocador().getNome(),
-                        contrato.getLocatario().getNome(),
-                        contrato.getLocatario().getTelefone(),
-                        contrato.getLocal().getPrice(),
-                        contrato.getLocal().getEndereco(),
-                        contrato.getLocal().getCidade().getName(),
-                        contrato.getLocador().getId(),
-                        contrato.getLocatario().getId()
-                );
-                contratosDTO.add(contratoDTO);
-            }
-        }
-        return contratosDTO;
-    }
+//    //Mudar para buscar por uma lista de ID
+//    public List<ContratoDTO> returnall() {
+//        List<Contrato> contratos = repository.findAll();
+//        List<ContratoDTO> contratosDTO = new ArrayList<>();
+//        for (Contrato contrato : contratos) {
+//            if (contrato != null && contrato.getLocador() != null) {
+//                ContratoDTO contratoDTO = new ContratoDTO(
+//                        contrato.getId(),
+//                        contrato.getData(),
+//                        contrato.getStatus(),
+//                        contrato.getLocal().getId(),
+//                        contrato.getLocador().getNome(),
+//                        contrato.getLocatario().getNome(),
+//                        contrato.getLocatario().getTelefone(),
+//                        contrato.getLocal().getPrice(),
+//                        contrato.getLocal().getEndereco(),
+//                        contrato.getLocal().getCidade().getName(),
+//                        contrato.getLocador().getId(),
+//                        contrato.getLocatario().getId()
+//                );
+//                contratosDTO.add(contratoDTO);
+//            }
+//        }
+//        return contratosDTO;
+//    }
 
 
     public void saveContrato(Contrato contrato) {
@@ -83,30 +83,12 @@ public class ContratoService {
     }
 
     public List<ContratoDTO> returnByLocatarioOuLocador(Long userId) {
-        List<Contrato> contratosLocatario = repository.findByLocatarioId(userId);
-        List<Contrato> contratosLocador = repository.findByLocadorId(userId);
+//        List<Contrato> contratosLocatario = repository.findByLocatarioId(userId);
+//        List<Contrato> contratosLocador = repository.findByLocadorId(userId);
+        List<Contrato> findByUser = repository.findByLocatario_IdOrLocador_Id(userId, userId);
 
         List<ContratoDTO> contratosDTO = new ArrayList<>();
-        for (Contrato contrato : contratosLocatario) {
-            if (contrato != null) {
-                ContratoDTO contratoDTO = new ContratoDTO(
-                        contrato.getId(),
-                        contrato.getData(),
-                        contrato.getStatus(),
-                        contrato.getLocal().getId(),
-                        contrato.getLocador().getNome(),
-                        contrato.getLocatario().getNome(),
-                        contrato.getLocatario().getTelefone(),
-                        contrato.getLocal().getPrice(),
-                        contrato.getLocal().getEndereco(),
-                        contrato.getLocal().getCidade().getName(),
-                        contrato.getLocador().getId(),
-                        contrato.getLocatario().getId()
-                );
-                contratosDTO.add(contratoDTO);
-            }
-        }
-        for (Contrato contrato : contratosLocador) {
+        for (Contrato contrato : findByUser) {
             if (contrato != null) {
                 ContratoDTO contratoDTO = new ContratoDTO(
                         contrato.getId(),

@@ -19,10 +19,10 @@ public class ContratoController {
     @Autowired
     private ContratoService service;
 
-    @GetMapping("/list")
-    public ResponseEntity<List<ContratoDTO>> returnAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<List<ContratoDTO>> returnAll() {
+//        return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
+//    }
 
     @GetMapping("/user/{id}")
     public List<ContratoDTO> getContratosByLocatarioOuLocador(@PathVariable(value = "id") Long Id) {

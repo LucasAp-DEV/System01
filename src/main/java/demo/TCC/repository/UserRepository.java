@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
 public interface UserRepository extends JpaRepository<User, Long> {
     UserDetails findByLogin(String login);
 

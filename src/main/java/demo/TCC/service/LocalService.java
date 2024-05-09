@@ -1,5 +1,6 @@
 package demo.TCC.service;
 
+import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
 import demo.TCC.repository.LocalRepository;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class LocalService {
@@ -65,6 +65,7 @@ public class LocalService {
             byte[] firstImageBytes = local.getImages().getFirst().getImage();
             imageBytesList.add(firstImageBytes);
         }
+
         return LocalDTO.builder()
                 .id(local.getId())
                 .price(local.getPrice())

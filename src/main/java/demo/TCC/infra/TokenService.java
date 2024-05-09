@@ -21,7 +21,7 @@ public class TokenService {
     public String generateToken(User user){ //Gerando o token
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
+            return JWT.create()
                     .withIssuer("TCC-api")
                     .withClaim("Id", user.getId())
                     .withSubject(user.getLogin())
@@ -29,7 +29,6 @@ public class TokenService {
                     .withClaim("Name", user.getNome())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
-            return token;
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Erro para gerar o Token", exception);
         }
