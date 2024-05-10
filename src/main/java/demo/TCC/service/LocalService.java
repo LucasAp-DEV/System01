@@ -1,6 +1,8 @@
 package demo.TCC.service;
 
 import demo.TCC.domain.contrato.Contrato;
+import demo.TCC.domain.feedback.Feedback;
+import demo.TCC.domain.feedback.FeedbackDTO;
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
 import demo.TCC.repository.LocalRepository;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class LocalService {
@@ -66,6 +69,11 @@ public class LocalService {
             imageBytesList.add(firstImageBytes);
         }
 
+        List<FeedbackDTO> feedbacks = local.getContratos().stream()
+                .flatMap(contrato -> contrato.getFeedbacks().stream())
+                .map(this::converteFeedback)
+                .collect(Collectors.toList());
+
         return LocalDTO.builder()
                 .id(local.getId())
                 .price(local.getPrice())
@@ -75,7 +83,15 @@ public class LocalService {
                 .locatarioId(local.getLocatario().getId())
                 .locatarioTell(local.getLocatario().getTelefone())
                 .cidade(local.getCidade().getName())
+                .feedback(feedbacks)
                 .images(imageBytesList)
+                .build();
+    }
+
+    private FeedbackDTO converteFeedback(Feedback feedback) {
+        return FeedbackDTO.builder()
+                .nota(feedback.getNota())
+                .descricao(feedback.getDescricao())
                 .build();
     }
 }
