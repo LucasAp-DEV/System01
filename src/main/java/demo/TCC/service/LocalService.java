@@ -3,6 +3,7 @@ package demo.TCC.service;
 import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.feedback.Feedback;
 import demo.TCC.domain.feedback.FeedbackDTO;
+import demo.TCC.domain.image.Image;
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
 import demo.TCC.repository.LocalRepository;
@@ -64,9 +65,8 @@ public class LocalService {
 
     public LocalDTO converte(Local local) {
         List<byte[]> imageBytesList = new ArrayList<>();
-        if (local.getImages() != null && !local.getImages().isEmpty()) {
-            byte[] firstImageBytes = local.getImages().getFirst().getImage();
-            imageBytesList.add(firstImageBytes);
+        for (Image image : local.getImages()) {
+            imageBytesList.add(image.getImage());
         }
 
         List<FeedbackDTO> feedbacks = local.getContratos().stream()
