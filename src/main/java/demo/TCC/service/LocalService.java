@@ -92,6 +92,7 @@ public class LocalService {
         return FeedbackDTO.builder()
                 .nota(feedback.getNota())
                 .descricao(feedback.getDescricao())
+                .nome(feedback.getContrato().getLocador().getNome())
                 .build();
     }
 }
