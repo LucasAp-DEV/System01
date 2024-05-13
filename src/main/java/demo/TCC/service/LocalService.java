@@ -29,6 +29,16 @@ public class LocalService {
         return localDTOS;
     }
 
+    public List<LocalDTO> returUserId(Long id) {
+        List<Local> localList = repository.findByLocatario_Id(id);
+        List<LocalDTO> localDTOS = new ArrayList<>();
+
+        for (Local local : localList) {
+            localDTOS.add(converte(local));
+        }
+        return localDTOS;
+    }
+
     public Long saveLocal(Local local) {
         Local savedLocal = repository.save(local);
         return savedLocal.getId();
@@ -50,18 +60,18 @@ public class LocalService {
 
     public void updateLocal(Long id, Local data) {
         var local = findById(id);
-        validate(data);
+//        validate(data);
         local.setPrice(data.getPrice());
         local.setEndereco(data.getEndereco());
         local.setDescricao(data.getDescricao());
         repository.save(local);
     }
 
-    private void validate(Local data) {
-        if (Objects.isNull(data.getPrice())) throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getEndereco())) throw new RuntimeException("Status é requirido");
-        if (Objects.isNull(data.getDescricao())) throw new RuntimeException("Status é requirido");
-    }
+//    private void validate(Local data) {
+//        if (Objects.isNull(data.getPrice())) throw new RuntimeException("Status é requirido");
+//        if (Objects.isNull(data.getEndereco())) throw new RuntimeException("Status é requirido");
+//        if (Objects.isNull(data.getDescricao())) throw new RuntimeException("Status é requirido");
+//    }
 
     public LocalDTO converte(Local local) {
         List<byte[]> imageBytesList = new ArrayList<>();

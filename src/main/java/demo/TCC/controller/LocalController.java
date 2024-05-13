@@ -41,6 +41,11 @@ public class LocalController {
         return ResponseEntity.status(HttpStatus.OK).body(service.returnAll());
     }
 
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<LocalDTO>> getAllLocalUserId(@PathVariable(value = "id")Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.returUserId(id));
+    }
+
     @GetMapping("/{id}") //Inserir Imagen e verificar
     public ResponseEntity<?> getByIdLocal(@PathVariable(value = "id")Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByLocalId(id));
