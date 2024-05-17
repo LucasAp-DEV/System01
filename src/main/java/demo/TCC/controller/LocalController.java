@@ -2,6 +2,8 @@ package demo.TCC.controller;
 
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
+import demo.TCC.domain.user.UpdateUserDTO;
+import demo.TCC.domain.user.User;
 import demo.TCC.service.LocalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,7 @@ public class LocalController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateLocal(@PathVariable(value = "id")Long id, @RequestBody Local data) {
-        service.updateLocal(id, data);
-        return ResponseEntity.status(HttpStatus.OK).body("Atualizado com Sucesso");
+        return service.updateLocal(id, data);
     }
 
     @DeleteMapping("/delete/{id}")

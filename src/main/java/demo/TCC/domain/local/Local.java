@@ -4,7 +4,6 @@ import demo.TCC.domain.cidade.Cidade;
 import demo.TCC.domain.image.Image;
 import demo.TCC.domain.user.User;
 import demo.TCC.domain.contrato.Contrato;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,4 +39,5 @@ public class Local {
 
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL)
     private List<Image> images = new ArrayList<>();
+
 }

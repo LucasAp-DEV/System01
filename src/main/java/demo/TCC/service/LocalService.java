@@ -6,8 +6,16 @@ import demo.TCC.domain.feedback.FeedbackDTO;
 import demo.TCC.domain.image.Image;
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
+import demo.TCC.domain.user.LoginResponseDTO;
+import demo.TCC.domain.user.UpdateUserDTO;
+import demo.TCC.domain.user.User;
 import demo.TCC.repository.LocalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,6 +26,9 @@ public class LocalService {
 
     @Autowired
     private LocalRepository repository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     public List<LocalDTO> returnAll() {
         List<Local> localList = repository.findAll();
@@ -58,20 +69,21 @@ public class LocalService {
         repository.delete(dellLocal);
     }
 
-    public void updateLocal(Long id, Local data) {
-        var local = findById(id);
-//        validate(data);
-        local.setPrice(data.getPrice());
-        local.setEndereco(data.getEndereco());
-        local.setDescricao(data.getDescricao());
-        repository.save(local);
-    }
+    public ResponseEntity<String> updateLocal(Long id, Local data) {
+        try {
+            var local = findById(id);
+            local.setPrice(data.getPrice());
+            local.setDescricao(data.getDescricao());
+            repository.save(local);
 
-//    private void validate(Local data) {
-//        if (Objects.isNull(data.getPrice())) throw new RuntimeException("Status é requirido");
-//        if (Objects.isNull(data.getEndereco())) throw new RuntimeException("Status é requirido");
-//        if (Objects.isNull(data.getDescricao())) throw new RuntimeException("Status é requirido");
-//    }
+            return ResponseEntity.status(HttpStatus.OK).body("Atualização realizada");
+
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Autenticação falhou");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar o local");
+        }
+    }
 
     public LocalDTO converte(Local local) {
         List<byte[]> imageBytesList = new ArrayList<>();
