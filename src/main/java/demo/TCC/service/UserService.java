@@ -3,6 +3,7 @@ package demo.TCC.service;
 import demo.TCC.domain.user.*;
 import demo.TCC.infra.TokenService;
 import demo.TCC.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +16,16 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository repository;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private TokenService tokenService;
+
+    private final UserRepository repository;
+
+    private final AuthenticationManager authenticationManager;
+
+    private final TokenService tokenService;
 
     public ResponseEntity<LoginResponseDTO> loginUser(AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());

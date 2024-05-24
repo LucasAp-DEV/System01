@@ -1,38 +1,29 @@
 package demo.TCC.service;
 
-import demo.TCC.domain.MercadoPagoNotification;
-import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.feedback.Feedback;
 import demo.TCC.domain.feedback.FeedbackDTO;
 import demo.TCC.domain.image.Image;
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
-import demo.TCC.domain.user.LoginResponseDTO;
-import demo.TCC.domain.user.UpdateUserDTO;
-import demo.TCC.domain.user.User;
 import demo.TCC.repository.LocalRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class LocalService {
 
-    @Autowired
-    private LocalRepository repository;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final LocalRepository repository;
 
     public List<LocalDTO> returnAll() {
         List<Local> localList = repository.findAll();
@@ -88,35 +79,6 @@ public class LocalService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar o local");
         }
     }
-
-    public ResponseEntity<String> processNotification(MercadoPagoNotification notification) {
-        try {
-            MercadoPagoNotification.NotificationData data = notification.getData();
-
-            if (data == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados da notificação estão ausentes.");
-            }
-            String status = data.getStatus();
-            String localId = data.getExternalReference();
-            Long id = Long.parseLong(localId);
-
-            Local local = findById(id);
-            if (local != null) {
-                if ("approved".equals(status)) {
-                    local.setTypeLocal("premium");
-                    repository.save(local);
-                    return ResponseEntity.ok("Propriedade 'TypeLocal' do local atualizada para 'premium' após pagamento aprovado.");
-                }
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Local não encontrado com o ID fornecido.");
-            }
-            return ResponseEntity.ok("Nenhuma ação necessária para a notificação recebida.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a notificação do MercadoPago: ");
-        }
-    }
-
-
 
     public LocalDTO converte(Local local) {
         List<byte[]> imageBytesList = new ArrayList<>();

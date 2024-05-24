@@ -6,6 +6,7 @@ import demo.TCC.domain.user.UpdateUserDTO;
 import demo.TCC.domain.user.User;
 import demo.TCC.service.LocalService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("local")
 public class LocalController {
 
-    @Autowired
-    private LocalService service;
+    private final LocalService service;
 
     @PostMapping("/register")
     public ResponseEntity<Long> registerLocal(@RequestBody @Valid Local local) {
@@ -27,7 +28,7 @@ public class LocalController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateLocal(@PathVariable(value = "id")Long id, @RequestBody Local data) {
+    public ResponseEntity<String> updateLocal(@PathVariable(value = "id") Long id, @RequestBody Local data) {
         return service.updateLocal(id, data);
     }
 

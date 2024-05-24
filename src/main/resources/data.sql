@@ -1,8 +1,8 @@
 INSERT INTO usuario (login, password, nome, email, telefone, role)
 VALUES
-    ('lucas', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Lucas Aparecido', 'lucas@gmail.com', '44997574461', 'ADMIN'),
-    ('leonardo', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Leonardo Rorato', 'leonardo@gmail.com', '44997574585', 'ADMIN'),
-    ('ivan', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Ivan Rorato', 'ivan@gmail.com', '44997574695', 'USER');
+    ('lucas', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Lucas Aparecido', 'lucas@gmail.com', '44997574461', 'LOCATARIO'),
+    ('leonardo', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Leonardo Rorato', 'leonardo@gmail.com', '44997574585', 'LOCATARIO'),
+    ('ivan', '$2a$10$M9EXjmb1W4tfAm4UbH9hpeY8OR0jyUEA4M5FlLiYrUd9G/GchBZi6', 'Ivan Rorato', 'ivan@gmail.com', '44997574695', 'LOCADOR');
 
 INSERT INTO cidade (name)
 VALUES
@@ -28,11 +28,11 @@ VALUES
     ('Campo Mourão'),
     ('Araruna');
 
-INSERT INTO local (price, descricao, endereco, cidade_id, locatario_id)
+INSERT INTO local (price, descricao, endereco, cidade_id, locatario_id, type)
 VALUES
-    (400, 'teste descrição 1', 'Rua Floresta', 2, 1),
-    (450, 'teste descrição 2', 'Rua Oceano', 3, 2),
-    (500, 'teste descrição 3', 'Rua acacia', 6, 3);
+    (400, 'teste descrição 1', 'Rua Floresta', 2, 1, 'PREMIUM'),
+    (450, 'teste descrição 2', 'Rua Oceano', 3, 2, 'PREMIUM'),
+    (500, 'teste descrição 3', 'Rua acacia', 6, 3, 'COMUN');
 
 INSERT INTO contrato (data, status, locador_id, locatario_id, local_id)
 VALUES

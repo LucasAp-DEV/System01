@@ -5,6 +5,7 @@ import demo.TCC.domain.contrato.ContratoDTO;
 import demo.TCC.domain.contrato.UpdateContratoDTO;
 import demo.TCC.service.ContratoService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("contrato")
 public class ContratoController {
 
-    @Autowired
-    private ContratoService service;
+
+    private final ContratoService service;
 
 //    @GetMapping("/list")
 //    public ResponseEntity<List<ContratoDTO>> returnAll() {

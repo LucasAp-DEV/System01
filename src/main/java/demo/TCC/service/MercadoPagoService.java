@@ -20,23 +20,23 @@ public class MercadoPagoService {
     @Value("${mercadopago.access.token}")
     private String accessToken;
 
-    public Payment createPayment(String email) throws MPException, MPApiException {
+    public Payment createPayment(String email, String id) throws MPException, MPApiException {
         try {
             MercadoPagoConfig.setAccessToken(accessToken);
             PaymentClient client = new PaymentClient();
             PaymentCreateRequest createRequest = PaymentCreateRequest.builder()
                     .transactionAmount(new BigDecimal(30)) //VALOR A SER PAGO
                     .description("PAGAMENTO") //DESCRIÇÃO
-                    .paymentMethodId("pix")
-                    .payer(PaymentPayerRequest.builder().email(email).build())
+                    .paymentMethodId("pix") //TIPO DE PAGAMENTO
+                    .payer(PaymentPayerRequest.builder().email(email).build()) //EMAIL
+                    .externalReference(id)
                     .build();
             return client.create(createRequest);
-        }catch (MPApiException e) {
+        } catch (MPApiException e) {
             throw new MPException(e.getMessage());
         }
     }
 }
-
 
 
 //DOCUMENTAÇÃO

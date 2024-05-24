@@ -7,5 +7,5 @@ import java.util.List;
 
 @Builder
 public record LocalDTO(Long id, String endereco, String descricao, Integer price, String locatarioName,
-                                  List<byte[]> images, String cidade, Long locatarioId, String locatarioTell, List<FeedbackDTO> feedback, String typeLocal) {
+                                  List<byte[]> images, String cidade, Long locatarioId, String locatarioTell, List<FeedbackDTO> feedback, String type) {
 }
