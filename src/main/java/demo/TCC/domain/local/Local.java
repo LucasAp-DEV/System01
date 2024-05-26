@@ -25,7 +25,6 @@ public class Local {
     private String endereco;
     private String descricao;
     private Integer price;
-    private String type;
 
     @ManyToOne
     @JoinColumn(name = "locatario_id", referencedColumnName = "id")

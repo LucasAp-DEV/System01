@@ -3,7 +3,6 @@ package demo.TCC.controller;
 import demo.TCC.domain.image.RegisterImageDTO;
 import demo.TCC.service.ImageService;
 import demo.TCC.domain.image.ImageDTO;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @RestController
 @RequestMapping("images")
 public class ImageController {
 
-    private final ImageService service;
+    @Autowired
+    private ImageService service;
 
     @PostMapping("/register")
     public ResponseEntity<String> registerImage(@RequestBody RegisterImageDTO data) {

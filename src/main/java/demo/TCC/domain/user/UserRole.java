@@ -1,8 +1,8 @@
 package demo.TCC.domain.user;
 
 public enum UserRole {
-    LOCATARIO("locatario"),
-    LOCADOR("locador");
+    ADMIN("admin"),
+    USER("user");
 
     private String role;
 
@@ -10,4 +10,7 @@ public enum UserRole {
         this.role = role;
     }
 
+    public String getRole(){
+        return role;
+    }
 }

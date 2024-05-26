@@ -59,8 +59,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/feedback/register").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/feedback/delete/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/feedback/list").permitAll()
-                        //Requisições Pagamento-
+                        //Requisições mercadoPago-
                         .requestMatchers(HttpMethod.POST, "/api/payments/create").permitAll()
+
                         .anyRequest().authenticated() //Deixando outras requisições permitidas
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

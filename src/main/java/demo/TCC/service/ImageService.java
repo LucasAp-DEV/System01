@@ -6,7 +6,6 @@ import demo.TCC.domain.image.RegisterImageDTO;
 import demo.TCC.domain.local.Local;
 import demo.TCC.repository.ImageRepository;
 import demo.TCC.repository.LocalRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +16,14 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
 public class ImageService {
 
-    private final ImageRepository repository;
+    @Autowired
+    private ImageRepository repository;
 
-    private final LocalRepository localRepository;
+    @Autowired
+    private LocalRepository localRepository;
 
     public List<ImageDTO> returnAll() {
         List<Image> imageList = repository.findAll();

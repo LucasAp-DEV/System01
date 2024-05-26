@@ -3,8 +3,8 @@ package demo.TCC.service;
 import demo.TCC.domain.user.*;
 import demo.TCC.infra.TokenService;
 import demo.TCC.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,15 +16,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 public class UserService {
 
 
     private final UserRepository repository;
-
     private final AuthenticationManager authenticationManager;
-
     private final TokenService tokenService;
 
     public ResponseEntity<LoginResponseDTO> loginUser(AuthenticationDTO data) {
@@ -93,6 +91,6 @@ public class UserService {
                 .telefone(user.getTelefone())
                 .id(user.getId())
                 .role(user.getRole());
-                return builder.build();
+        return builder.build();
     }
 }

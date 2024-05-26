@@ -21,8 +21,7 @@ public class MercadoLivreController {
     public ResponseEntity<?> createPayment(@RequestBody Map<String, Object> paymentData) {
         try {
             String email = paymentData.get("email").toString();
-            String id = paymentData.get("id").toString();
-            Payment payment = service.createPayment(email, id);
+            Payment payment = service.createPayment(email);
             return ResponseEntity.ok(payment);
         } catch (MPApiException | MPException e) {
             int statusCode = e instanceof MPApiException ? ((MPApiException) e).getApiResponse().getStatusCode() : 500;
