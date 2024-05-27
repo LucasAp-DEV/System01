@@ -44,11 +44,8 @@ INSERT INTO feedback (nota, descricao, contrato_id)
 VALUES
     (10, 'Excelente serviço prestado', 1),
     (9, 'Boa comunicação e pontualidade', 2),
-    (3, 'Alguns problemas durante o serviçoS', 3),
-    (9, 'Boa comunicação e pontualidade teste2', 1),
-    (9, 'Boa comunicação e pontualidade teste3', 1),
-    (9, 'Boa comunicação e pontualidade teste4', 1),
-    (9, 'Boa comunicação e pontualidade teste5', 1);
+    (3, 'Alguns problemas durante o serviçoS', 3)
+
 
 
 

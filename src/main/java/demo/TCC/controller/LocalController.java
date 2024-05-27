@@ -2,8 +2,7 @@ package demo.TCC.controller;
 
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
-import demo.TCC.domain.user.UpdateUserDTO;
-import demo.TCC.domain.user.User;
+import demo.TCC.domain.local.LocalFilterDTO;
 import demo.TCC.service.LocalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -48,9 +48,12 @@ public class LocalController {
     }
 
 //    @GetMapping("/filter")
-//    public ResponseEntity<List<LocalDTO>> getAllLocalFilter(@RequestBody LocalFilter localFilter) {
-//        return ResponseEntity.status(HttpStatus.OK).body(service.returnLocalFilter(localFilter));
+//    public ResponseEntity<List<LocalDTO>> getAllLocalFilter(
+//            @RequestParam(value = "cityId", required = false, defaultValue = "") Long cityId,
+//            @RequestParam(value = "data", required = false, defaultValue = "") LocalDate data) {
+//        return ResponseEntity.status(HttpStatus.OK).body(service.returnLocalFilter(cityId, data));
 //    }
+
 
     @GetMapping("/{id}") //Inserir Imagen e verificar
     public ResponseEntity<?> getByIdLocal(@PathVariable(value = "id")Long id) {

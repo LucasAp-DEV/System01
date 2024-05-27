@@ -6,6 +6,7 @@ import demo.TCC.domain.feedback.FeedbackDTO;
 import demo.TCC.domain.image.Image;
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
+import demo.TCC.domain.local.LocalFilterDTO;
 import demo.TCC.domain.user.LoginResponseDTO;
 import demo.TCC.domain.user.UpdateUserDTO;
 import demo.TCC.domain.user.User;
@@ -18,6 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,6 +51,17 @@ public class LocalService {
         }
         return localDTOS;
     }
+//
+//    public List<LocalDTO> returnLocalFilter(Long cityId, LocalDate data) {
+//        List<Local> localList = repository.findByCidade_Id(cityId);
+//        List<LocalDTO> localDTOS = new ArrayList<>();
+//
+//        for (Local local : localList) {
+//            localDTOS.add(converte(local));
+//        }
+//        return localDTOS;
+//    }
+
 
     public Long saveLocal(Local local) {
         Local savedLocal = repository.save(local);
@@ -105,6 +118,7 @@ public class LocalService {
                 .locatarioId(local.getLocatario().getId())
                 .locatarioTell(local.getLocatario().getTelefone())
                 .cidade(local.getCidade().getName())
+                .cidadeId(local.getCidade().getId())
                 .feedback(feedbacks)
                 .images(imageBytesList)
                 .build();

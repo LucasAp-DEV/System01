@@ -19,11 +19,6 @@ public class ContratoController {
     @Autowired
     private ContratoService service;
 
-//    @GetMapping("/list")
-//    public ResponseEntity<List<ContratoDTO>> returnAll() {
-//        return ResponseEntity.status(HttpStatus.OK).body(service.returnall());
-//    }
-
     @GetMapping("/user/{id}")
     public List<ContratoDTO> getContratosByLocatarioOuLocador(@PathVariable(value = "id") Long Id) {
         return service.returnByLocatarioOuLocador(Id);
@@ -34,11 +29,11 @@ public class ContratoController {
         return ResponseEntity.status(HttpStatus.OK).body(service.findByUserId(id));
     }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<String> registerContrato(@RequestBody @Valid Contrato data) {
-//        service.saveContrato(data);
-//        return ResponseEntity.ok().body("Contrado Cadastrado");
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<String> registerContrato(@RequestBody @Valid Contrato data) {
+        service.saveContrato(data);
+        return ResponseEntity.ok().body("Contrado Cadastrado");
+    }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateContrato(@PathVariable(value = "id") Long id, @RequestBody UpdateContratoDTO data) {

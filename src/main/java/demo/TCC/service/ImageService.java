@@ -39,11 +39,6 @@ public class ImageService {
         return imageDTOS;
     }
 
-
-    public void saveImage(Image image) {
-        repository.save(image);
-    }
-
     public Image findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Image não Encontrada"));
     }

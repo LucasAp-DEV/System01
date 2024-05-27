@@ -22,17 +22,17 @@ public class ContratoService {
     @Autowired
     private ContratoRepository repository;
 
-//    public void saveContrato(Contrato contrato) {
-//        LocalDate data = contrato.getData();
-//        Local local = contrato.getLocal();
-//
-//        Optional<Contrato> existContrato = repository.findByDataAndLocal(data, local);
-//
-//        if (existContrato.isPresent()) {
-//            throw new AppException("Ja existe um contrato com essa data.");
-//        }
-//        repository.save(contrato);
-//    }
+    public void saveContrato(Contrato contrato) {
+        LocalDate data = contrato.getData();
+        Local local = contrato.getLocal();
+
+        Optional<Contrato> existContrato = repository.findByDataAndLocal(data, local);
+
+        if (existContrato.isPresent()) {
+            throw new RuntimeException("Ja existe um contrato com essa data.");
+        }
+        repository.save(contrato);
+    }
 
     public Contrato returnId(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Contrato não Encontrado"));

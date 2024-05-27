@@ -40,6 +40,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/local/list").permitAll()
                         .requestMatchers(HttpMethod.GET, "/local/list/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/local/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/local/filter").permitAll()
                         //Requisições contrato-
                         .requestMatchers(HttpMethod.POST, "/contrato/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/contrato/update/{id}").permitAll()
