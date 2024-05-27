@@ -62,7 +62,7 @@ public class ImageService {
             Long localId = data.localId();
             Local local = findByIdLocal(localId);
 
-            data.images().forEach(imageData->{
+            data.images().forEach(imageData -> {
                 String base64Image = imageData.replaceFirst("data:image/[^;]+;base64,", "");
                 byte[] imageDataBytes = Base64.getDecoder().decode(base64Image);
                 repository.save(new Image(imageDataBytes, local));

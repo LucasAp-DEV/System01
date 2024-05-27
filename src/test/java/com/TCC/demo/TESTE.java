@@ -1,30 +1,29 @@
-package demo.TCC;
+package com.TCC.demo;
 
-import com.mercadopago.*;
+import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.payment.PaymentClient;
 import com.mercadopago.client.payment.PaymentCreateRequest;
 import com.mercadopago.client.payment.PaymentPayerRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 
 public class TESTE {
-
-    public static void main(String[] args) {
-        MercadoPagoConfig.setAccessToken("TEST-4930437431978443-051908-bf6527a261c3e663085429a75815f67b-256585597");
+    @Test
+    public void testarApiMercadoPago() {
+        MercadoPagoConfig.setAccessToken("TEST-1120009213344655-021507-b9f77997850821590cc1b2bc68f6e964-150846749");
 
         PaymentClient client = new PaymentClient();
 
         PaymentCreateRequest createRequest =
                 PaymentCreateRequest.builder()
-                        .transactionAmount(new BigDecimal(1000))
-                        .token("your_cardtoken")
+                        .transactionAmount(new BigDecimal(10))
                         .description("description do produto")
-                        .installments(1)
                         .paymentMethodId("pix")
-                        .payer(PaymentPayerRequest.builder().email("LUCAS@gmail.com").build())
+                        .payer(PaymentPayerRequest.builder().email("marcos@moleniuk.com").build())
                         .build();
 
         try {

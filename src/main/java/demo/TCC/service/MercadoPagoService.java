@@ -5,6 +5,7 @@ import com.mercadopago.client.payment.PaymentClient;
 import com.mercadopago.client.payment.PaymentCreateRequest;
 import com.mercadopago.client.payment.PaymentPayerRequest;
 import com.mercadopago.resources.payment.Payment;
+import demo.TCC.domain.mercadoPago.MercadoPagoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,18 @@ public class MercadoPagoService {
     @Value("${mercadopago.access.token}")
     private String accessToken;
 
-    public Payment createPayment(String email) throws MPException, MPApiException {
+    public Payment createPayment(MercadoPagoDTO data) throws MPException, MPApiException {
         try {
+            String email = data.email();
+            String id = data.id();
             MercadoPagoConfig.setAccessToken(accessToken);
             PaymentClient client = new PaymentClient();
             PaymentCreateRequest createRequest = PaymentCreateRequest.builder()
                     .transactionAmount(new BigDecimal(30)) //VALOR A SER PAGO
                     .description("PAGAMENTO") //DESCRIÇÃO
                     .paymentMethodId("pix") //TIPO DE PAGAMENTO
-                    .payer(PaymentPayerRequest.builder().email("lucas2@gmail.com").build()) //EMAIl
+                    .payer(PaymentPayerRequest.builder().email(email).build())
+                    .externalReference(id)//EMAIl
                     .build();
             return client.create(createRequest);
         } catch (MPApiException e) {
