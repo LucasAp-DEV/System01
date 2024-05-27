@@ -3,14 +3,17 @@ package demo.TCC.service;
 import demo.TCC.domain.contrato.ContratoDTO;
 import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.contrato.UpdateContratoDTO;
+import demo.TCC.domain.local.Local;
 import demo.TCC.repository.ContratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContratoService {
@@ -18,34 +21,15 @@ public class ContratoService {
     @Autowired
     private ContratoRepository repository;
 
-//    //Mudar para buscar por uma lista de ID
-//    public List<ContratoDTO> returnall() {
-//        List<Contrato> contratos = repository.findAll();
-//        List<ContratoDTO> contratosDTO = new ArrayList<>();
-//        for (Contrato contrato : contratos) {
-//            if (contrato != null && contrato.getLocador() != null) {
-//                ContratoDTO contratoDTO = new ContratoDTO(
-//                        contrato.getId(),
-//                        contrato.getData(),
-//                        contrato.getStatus(),
-//                        contrato.getLocal().getId(),
-//                        contrato.getLocador().getNome(),
-//                        contrato.getLocatario().getNome(),
-//                        contrato.getLocatario().getTelefone(),
-//                        contrato.getLocal().getPrice(),
-//                        contrato.getLocal().getEndereco(),
-//                        contrato.getLocal().getCidade().getName(),
-//                        contrato.getLocador().getId(),
-//                        contrato.getLocatario().getId()
-//                );
-//                contratosDTO.add(contratoDTO);
-//            }
-//        }
-//        return contratosDTO;
-//    }
-
-
     public void saveContrato(Contrato contrato) {
+        LocalDate data = contrato.getData();
+        Local local = contrato.getLocal();
+
+        Optional<Contrato> existContrato = repository.findByDataAndLocal(data, local);
+
+        if (existContrato.isPresent()) {
+            throw new RuntimeException("Ja existe um contrato com essa data.");
+        }
         repository.save(contrato);
     }
 
