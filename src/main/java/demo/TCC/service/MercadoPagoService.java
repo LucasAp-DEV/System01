@@ -31,8 +31,8 @@ public class MercadoPagoService {
                     .transactionAmount(new BigDecimal(30)) //VALOR A SER PAGO
                     .description("PAGAMENTO") //DESCRIÇÃO
                     .paymentMethodId("pix") //TIPO DE PAGAMENTO
-                    .payer(PaymentPayerRequest.builder().email(email).build())
-                    .externalReference(id)//EMAIl
+                    .payer(PaymentPayerRequest.builder().email(email).build())//EMAIL
+                    .externalReference(id)
                     .build();
             return client.create(createRequest);
         } catch (MPApiException e) {

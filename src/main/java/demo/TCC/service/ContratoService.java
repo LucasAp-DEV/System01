@@ -1,5 +1,6 @@
 package demo.TCC.service;
 
+import demo.TCC.CustomException;
 import demo.TCC.domain.contrato.ContratoDTO;
 import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.contrato.UpdateContratoDTO;
@@ -68,32 +69,35 @@ public class ContratoService {
     }
 
     public List<ContratoDTO> returnByLocatarioOuLocador(Long userId) {
-//        List<Contrato> contratosLocatario = repository.findByLocatarioId(userId);
-//        List<Contrato> contratosLocador = repository.findByLocadorId(userId);
-        List<Contrato> findByUser = repository.findByLocatario_IdOrLocador_Id(userId, userId);
+        try {
+            List<Contrato> findByUser = repository.findByLocatario_IdOrLocador_Id(userId, userId);
 
-        List<ContratoDTO> contratosDTO = new ArrayList<>();
-        for (Contrato contrato : findByUser) {
-            if (contrato != null) {
-                ContratoDTO contratoDTO = new ContratoDTO(
-                        contrato.getId(),
-                        contrato.getData(),
-                        contrato.getStatus(),
-                        contrato.getLocal().getId(),
-                        contrato.getLocador().getNome(),
-                        contrato.getLocatario().getNome(),
-                        contrato.getLocatario().getTelefone(),
-                        contrato.getLocal().getPrice(),
-                        contrato.getLocal().getEndereco(),
-                        contrato.getLocal().getCidade().getName(),
-                        contrato.getLocador().getId(),
-                        contrato.getLocatario().getId()
-                );
-                contratosDTO.add(contratoDTO);
+            List<ContratoDTO> contratosDTO = new ArrayList<>();
+            for (Contrato contrato : findByUser) {
+                if (contrato != null) {
+                    ContratoDTO contratoDTO = new ContratoDTO(
+                            contrato.getId(),
+                            contrato.getData(),
+                            contrato.getStatus(),
+                            contrato.getLocal().getId(),
+                            contrato.getLocador().getNome(),
+                            contrato.getLocatario().getNome(),
+                            contrato.getLocatario().getTelefone(),
+                            contrato.getLocal().getPrice(),
+                            contrato.getLocal().getEndereco(),
+                            contrato.getLocal().getCidade().getName(),
+                            contrato.getLocador().getId(),
+                            contrato.getLocatario().getId()
+                    );
+                    contratosDTO.add(contratoDTO);
+                }
             }
+            return contratosDTO;
+        } catch (Exception e) {
+            throw new CustomException("Erro ao buscar contratos: " + e.getMessage());
         }
-        return contratosDTO;
     }
+
 
 }
 

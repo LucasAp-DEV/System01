@@ -1,5 +1,6 @@
 package demo.TCC.service;
 
+import demo.TCC.CustomException;
 import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.feedback.Feedback;
 import demo.TCC.domain.feedback.FeedbackDTO;
@@ -51,6 +52,7 @@ public class LocalService {
         }
         return localDTOS;
     }
+
 //
 //    public List<LocalDTO> returnLocalFilter(Long cityId, LocalDate data) {
 //        List<Local> localList = repository.findByCidade_Id(cityId);
