@@ -116,6 +116,7 @@ public class LocalService {
                 .price(local.getPrice())
                 .descricao(local.getDescricao())
                 .endereco(local.getEndereco())
+                .status(local.getStatus())
                 .locatarioName(local.getLocatario().getNome())
                 .locatarioId(local.getLocatario().getId())
                 .locatarioTell(local.getLocatario().getTelefone())

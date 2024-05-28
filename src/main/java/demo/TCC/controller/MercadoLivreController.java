@@ -4,6 +4,7 @@ import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
 import demo.TCC.domain.mercadoPago.MercadoPagoDTO;
+import demo.TCC.domain.mercadoPago.ResponseMercadoPago;
 import demo.TCC.service.MercadoPagoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,9 @@ public class MercadoLivreController {
             return ResponseEntity.status(statusCode).body(e.getMessage());
         }
     }
-}
 
+    @PostMapping("/response")
+    public void updateTypeLocal(@RequestBody ResponseMercadoPago data) {
+        service.updateTypeLocal(data);
+    }
+}

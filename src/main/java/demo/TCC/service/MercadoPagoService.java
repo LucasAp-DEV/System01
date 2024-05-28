@@ -5,9 +5,15 @@ import com.mercadopago.client.payment.PaymentClient;
 import com.mercadopago.client.payment.PaymentCreateRequest;
 import com.mercadopago.client.payment.PaymentPayerRequest;
 import com.mercadopago.resources.payment.Payment;
+import demo.TCC.domain.local.Local;
 import demo.TCC.domain.mercadoPago.MercadoPagoDTO;
+import demo.TCC.domain.mercadoPago.ResponseMercadoPago;
+import demo.TCC.repository.LocalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
@@ -20,6 +26,8 @@ public class MercadoPagoService {
 
     @Value("${mercadopago.access.token}")
     private String accessToken;
+
+    private final LocalRepository localRepository;
 
     public Payment createPayment(MercadoPagoDTO data) throws MPException, MPApiException {
         try {
@@ -37,6 +45,19 @@ public class MercadoPagoService {
             return client.create(createRequest);
         } catch (MPApiException e) {
             throw new MPException(e.getMessage());
+        }
+    }
+
+    public void updateTypeLocal(ResponseMercadoPago data) {
+        String external_reference = data.external_reference();
+        Long id = Long.valueOf(external_reference);
+        var optionalLocal = localRepository.findById(id);
+        if (optionalLocal.isPresent()) {
+            Local local = optionalLocal.get();
+            local.setStatus(data.status());
+            localRepository.save(local);
+        }else {
+            System.out.println("Local não encontrado para o id: " + id);
         }
     }
 }

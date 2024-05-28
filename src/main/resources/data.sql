@@ -28,11 +28,11 @@ VALUES
     ('Campo Mourão'),
     ('Araruna');
 
-INSERT INTO local (price, descricao, endereco, cidade_id, locatario_id)
+INSERT INTO local (price, descricao, endereco, cidade_id, locatario_id, status)
 VALUES
-    (400, 'teste descrição 1', 'Rua Floresta', 2, 1),
-    (450, 'teste descrição 2', 'Rua Oceano', 3, 2),
-    (500, 'teste descrição 3', 'Rua acacia', 6, 3);
+    (400, 'teste descrição 1', 'Rua Floresta', 2, 1, 'NORMAL'),
+    (450, 'teste descrição 2', 'Rua Oceano', 3, 2, 'PATROCINADO'),
+    (500, 'teste descrição 3', 'Rua acacia', 6, 3, 'NORMAL');
 
 INSERT INTO contrato (data, status, locador_id, locatario_id, local_id)
 VALUES
