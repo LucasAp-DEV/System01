@@ -62,6 +62,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/feedback/list").permitAll()
                         //Requisições mercadoPago-
                         .requestMatchers(HttpMethod.POST, "/api/payments/create").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/payments/response").permitAll()
 
                         .anyRequest().authenticated() //Deixando outras requisições permitidas
                 )

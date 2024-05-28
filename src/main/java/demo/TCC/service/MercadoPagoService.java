@@ -54,12 +54,14 @@ public class MercadoPagoService {
         var optionalLocal = localRepository.findById(id);
         if (optionalLocal.isPresent()) {
             Local local = optionalLocal.get();
-            local.setStatus(data.status());
+            local.setStatus("PATROCINADO");
             localRepository.save(local);
-        }else {
+            System.out.println("Local Patrociando");
+        } else {
             System.out.println("Local não encontrado para o id: " + id);
         }
     }
+
 }
 
 
