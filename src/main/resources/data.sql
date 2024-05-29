@@ -36,9 +36,9 @@ VALUES
 
 INSERT INTO contrato (data, status, locador_id, locatario_id, local_id)
 VALUES
-    ('2024-05-07', 'ABERTO', 1, 3, 1),
-    ('2024-05-07', 'ABERTO', 2, 3, 2),
-    ('2024-05-07', 'ABERTO', 3, 1, 3);
+    ('2024-05-07', 'ABERTO', 2, 1, 1),
+    ('2024-05-07', 'ABERTO', 3, 2, 2),
+    ('2024-05-07', 'ABERTO', 1, 3, 3);
 
 INSERT INTO feedback (nota, descricao, contrato_id)
 VALUES

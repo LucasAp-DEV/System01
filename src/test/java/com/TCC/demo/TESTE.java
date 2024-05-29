@@ -12,7 +12,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 public class TESTE {
-    @Test
+    //@Test
     public void testarApiMercadoPago() {
         MercadoPagoConfig.setAccessToken("TEST-1120009213344655-021507-b9f77997850821590cc1b2bc68f6e964-150846749");
 

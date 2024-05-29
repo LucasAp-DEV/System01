@@ -11,9 +11,6 @@ import demo.TCC.domain.mercadoPago.ResponseMercadoPago;
 import demo.TCC.repository.LocalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
@@ -49,18 +46,31 @@ public class MercadoPagoService {
     }
 
     public void updateTypeLocal(ResponseMercadoPago data) {
-        String external_reference = data.external_reference();
-        Long id = Long.valueOf(external_reference);
+        String externalReference = data.external_reference();
+        String status = data.status();
+
+        if (externalReference == null || status == null) {
+            System.out.println("Dados invalidos");
+            return;
+        }
+
+        Long id = Long.valueOf(externalReference);
         var optionalLocal = localRepository.findById(id);
+
         if (optionalLocal.isPresent()) {
-            Local local = optionalLocal.get();
-            local.setStatus("PATROCINADO");
-            localRepository.save(local);
-            System.out.println("Local Patrociando");
+            if ("approved".equals(status)) { //VERIFICAR SE O STATUS É IGUAL APPROVED
+                Local local = optionalLocal.get();
+                local.setStatus("PATROCINADO");
+                localRepository.save(local);
+                System.out.println("Local Patrocinado");
+            } else {
+                System.out.println("Status nao e aprovado: " + status);
+            }
         } else {
-            System.out.println("Local não encontrado para o id: " + id);
+            System.out.println("Local nao encontrado para o id: " + id);
         }
     }
+
 
 }
 

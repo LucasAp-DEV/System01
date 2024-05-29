@@ -30,9 +30,6 @@ public class LocalService {
     @Autowired
     private LocalRepository repository;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     public List<LocalDTO> returnAll() {
         List<Local> localList = repository.findAll();
         List<LocalDTO> localDTOS = new ArrayList<>();
