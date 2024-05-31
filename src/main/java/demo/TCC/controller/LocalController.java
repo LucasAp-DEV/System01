@@ -5,6 +5,7 @@ import demo.TCC.domain.local.LocalDTO;
 import demo.TCC.domain.local.LocalFilterDTO;
 import demo.TCC.service.LocalService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("local")
 public class LocalController {
 
-    @Autowired
-    private LocalService service;
+    private final LocalService service;
 
     @PostMapping("/register")
     public ResponseEntity<Long> registerLocal(@RequestBody @Valid Local local) {

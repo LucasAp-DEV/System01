@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -35,6 +36,8 @@ public class UserService {
     public ResponseEntity<String> saveUser(RegisterUserDTO data) {
         if (returnName(data.login()) != null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nome de usuario em uso");
+        if (returnemail(data.email()) != null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND). body("Email ja esta em uso");
         var encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.login(), encryptedPassword, data.role(), data.nome(), data.email(), data.telefone());
         repository.save(newUser);
@@ -44,6 +47,7 @@ public class UserService {
     public UserDetails returnName(String name) {
         return repository.findByLogin(name);
     }
+    public Optional<User> returnemail (String email) {return repository.findByEmail(email);}
 
     public User findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));

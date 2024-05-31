@@ -7,6 +7,7 @@ import demo.TCC.domain.contrato.UpdateContratoDTO;
 import demo.TCC.domain.local.Local;
 import demo.TCC.exception.AppException;
 import demo.TCC.repository.ContratoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class ContratoService {
 
-    @Autowired
-    private ContratoRepository repository;
+    private final ContratoRepository repository;
 
     public void saveContrato(Contrato contrato) {
         LocalDate data = contrato.getData();

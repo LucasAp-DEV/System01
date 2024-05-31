@@ -4,19 +4,19 @@ import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.feedback.Feedback;
 import demo.TCC.repository.ContratoRepository;
 import demo.TCC.repository.FeedbackRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class FeedbackService {
 
-    @Autowired
-    private FeedbackRepository repository;
+    private final FeedbackRepository repository;
 
-    @Autowired
-    private ContratoRepository repositoryContrato;
+    private final ContratoRepository repositoryContrato;
 
     public List<Feedback> returnAll() {
         return repository.findAll();

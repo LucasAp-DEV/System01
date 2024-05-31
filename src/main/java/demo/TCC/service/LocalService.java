@@ -12,6 +12,7 @@ import demo.TCC.domain.user.LoginResponseDTO;
 import demo.TCC.domain.user.UpdateUserDTO;
 import demo.TCC.domain.user.User;
 import demo.TCC.repository.LocalRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,11 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class LocalService {
 
-    @Autowired
-    private LocalRepository repository;
+    private final LocalRepository repository;
 
     public List<LocalDTO> returnAll() {
         List<Local> localList = repository.findAll();
@@ -88,10 +89,10 @@ public class LocalService {
             local.setDescricao(data.getDescricao());
             repository.save(local);
 
-            return ResponseEntity.status(HttpStatus.OK).body("Atualização realizada");
+            return ResponseEntity.status(HttpStatus.OK).body("Atualizaçao realizada");
 
         } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Autenticação falhou");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Autenticaçao falhou");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar o local");
         }
