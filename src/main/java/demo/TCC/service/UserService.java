@@ -47,7 +47,7 @@ public class UserService {
     public UserDetails returnName(String name) {
         return repository.findByLogin(name);
     }
-    public Optional<User> returnemail (String email) {return repository.findByEmail(email);}
+    public UserDetails returnemail (String email) {return repository.findByEmail(email);}
 
     public User findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
