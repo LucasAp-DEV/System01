@@ -51,16 +51,16 @@ public class LocalService {
         return localDTOS;
     }
 
-//
-//    public List<LocalDTO> returnLocalFilter(Long cityId, LocalDate data) {
-//        List<Local> localList = repository.findByCidade_Id(cityId);
-//        List<LocalDTO> localDTOS = new ArrayList<>();
-//
-//        for (Local local : localList) {
-//            localDTOS.add(converte(local));
-//        }
-//        return localDTOS;
-//    }
+
+    public List<LocalDTO> returnLocalFilter(LocalDate data) {
+        List<Local> localList = repository.findByContratosDataNot(data);
+        List<LocalDTO> localDTOS = new ArrayList<>();
+
+        for (Local local : localList) {
+            localDTOS.add(converte(local));
+        }
+        return localDTOS;
+    }
 
 
     public Long saveLocal(Local local) {

@@ -48,13 +48,10 @@ public class LocalController {
         return ResponseEntity.status(HttpStatus.OK).body(service.returUserId(id));
     }
 
-//    @GetMapping("/filter")
-//    public ResponseEntity<List<LocalDTO>> getAllLocalFilter(
-//            @RequestParam(value = "cityId", required = false, defaultValue = "") Long cityId,
-//            @RequestParam(value = "data", required = false, defaultValue = "") LocalDate data) {
-//        return ResponseEntity.status(HttpStatus.OK).body(service.returnLocalFilter(cityId, data));
-//    }
-
+    @GetMapping("/filter")
+    public ResponseEntity<List<LocalDTO>> getAllLocalFilter(@RequestParam(value = "data", required = false, defaultValue = "") LocalDate data) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.returnLocalFilter(data));
+    }
 
     @GetMapping("/{id}") //Inserir Imagen e verificar
     public ResponseEntity<?> getByIdLocal(@PathVariable(value = "id")Long id) {
