@@ -87,6 +87,8 @@ public class LocalService {
             var local = findById(id);
             local.setPrice(data.getPrice());
             local.setDescricao(data.getDescricao());
+            local.setEndereco(data.getEndereco());
+            local.setDisponibilidade(data.getDisponibilidade());
             repository.save(local);
 
             return ResponseEntity.status(HttpStatus.OK).body("Atualizaçao realizada");
@@ -120,6 +122,7 @@ public class LocalService {
                 .locatarioTell(local.getLocatario().getTelefone())
                 .cidade(local.getCidade().getName())
                 .cidadeId(local.getCidade().getId())
+                .disponibilidade(local.getDisponibilidade())
                 .feedback(feedbacks)
                 .images(imageBytesList)
                 .build();
