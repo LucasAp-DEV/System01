@@ -1,23 +1,14 @@
 package demo.TCC.service;
 
-import demo.TCC.CustomException;
-import demo.TCC.domain.contrato.Contrato;
 import demo.TCC.domain.feedback.Feedback;
 import demo.TCC.domain.feedback.FeedbackDTO;
 import demo.TCC.domain.image.Image;
 import demo.TCC.domain.local.Local;
 import demo.TCC.domain.local.LocalDTO;
-import demo.TCC.domain.local.LocalFilterDTO;
-import demo.TCC.domain.user.LoginResponseDTO;
-import demo.TCC.domain.user.UpdateUserDTO;
-import demo.TCC.domain.user.User;
 import demo.TCC.repository.LocalRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 

@@ -32,14 +32,13 @@ public class SecurityConfigurations {
                         //Requisições user-
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/user/update/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/user/delete/{id}").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/user/update/{id}").hasRole("LOCADOR")
                         .requestMatchers(HttpMethod.GET, "/user/list").permitAll()
                         .requestMatchers(HttpMethod.GET, "/user/{id}").permitAll()
                         //Requisições local-
-                        .requestMatchers(HttpMethod.POST, "/local/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/local/update/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/local/delete/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/local/register").hasRole("LOCADOR")
+                        .requestMatchers(HttpMethod.PUT, "/local/update/{id}").hasRole("LOCADOR")
+//                        .requestMatchers(HttpMethod.DELETE, "/local/delete/{id}").hasRole("LOCADOR")
                         .requestMatchers(HttpMethod.GET, "/local/list").permitAll()
                         .requestMatchers(HttpMethod.GET, "/local/list/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/local/{id}").permitAll()
@@ -47,17 +46,17 @@ public class SecurityConfigurations {
                         //Requisições contrato-
                         .requestMatchers(HttpMethod.POST, "/contrato/register").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/contrato/update/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/contrato/delete").permitAll()
+//                        .requestMatchers(HttpMethod.DELETE, "/contrato/delete").permitAll()
                         .requestMatchers(HttpMethod.GET, "/contrato/list").permitAll()
                         .requestMatchers(HttpMethod.GET, "/contrato/user/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/contrato/{id}").permitAll()
                         //Requisições cidade-
-                        .requestMatchers(HttpMethod.POST, "/cidade/register").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/cidade/delete").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/cidade/list").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/cidade/register").hasRole("LOCADOR")
+//                        .requestMatchers(HttpMethod.DELETE, "/cidade/delete").hasRole("LOCADOR")
+                        .requestMatchers(HttpMethod.GET, "/cidade/list").hasRole("LOCADOR")
                         //Requisições image-
-                        .requestMatchers(HttpMethod.POST, "/images/register").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/images/delete/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/images/register").hasRole("LOCADOR")
+//                        .requestMatchers(HttpMethod.DELETE, "/images/delete/{id}").hasRole("LOCADOR")
                         .requestMatchers(HttpMethod.GET, "/images/list").permitAll()
                         //Requisições feedback-
                         .requestMatchers(HttpMethod.POST, "/feedback/register").permitAll()
