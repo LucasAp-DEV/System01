@@ -32,19 +32,23 @@ INSERT INTO local (price, descricao, endereco, cidade_id, locatario_id, status, 
 VALUES
     (400, 'teste descrição 1', 'Rua Floresta', 2, 1, 'NORMAL',1),
     (450, 'teste descrição 2', 'Rua Oceano', 3, 2, 'PATROCINADO',1),
-    (500, 'teste descrição 3', 'Rua acacia', 6, 3, 'NORMAL',1);
+    (500, 'teste descrição 3', 'Rua acacia', 6, 3, 'NORMAL',1),
+    (550, 'teste descrição 4', 'Rua Marfin', 8, 3, 'PATROCINADO',1);
 
 INSERT INTO contrato (data, status, locador_id, locatario_id, local_id)
 VALUES
-    ('2024-05-07', 'ABERTO', 2, 1, 1),
-    ('2024-05-07', 'ABERTO', 3, 2, 2),
-    ('2024-05-07', 'ABERTO', 1, 3, 3);
+    ('2024-05-05', 'ABERTO', 2, 1, 1),
+    ('2024-05-30', 'ABERTO', 3, 2, 2),
+    ('2024-05-20', 'ABERTO', 1, 3, 3),
+    ('2024-05-10', 'ABERTO', 1, 3, 4);
 
 INSERT INTO feedback (nota, descricao, contrato_id)
 VALUES
     (10, 'Excelente serviço prestado', 1),
     (9, 'Boa comunicação e pontualidade', 2),
-    (3, 'Alguns problemas durante o serviçoS', 3)
+    (3, 'Alguns problemas durante o serviçoS', 3),
+    (5, 'Alguns problemas durante o serviçoS', 4);
+
 
 
 

@@ -55,7 +55,7 @@ public class SecurityConfigurations {
 //                        .requestMatchers(HttpMethod.DELETE, "/cidade/delete").hasRole("LOCADOR")
                         .requestMatchers(HttpMethod.GET, "/cidade/list").hasRole("LOCADOR")
                         //Requisições image-
-                        .requestMatchers(HttpMethod.POST, "/images/register").hasRole("LOCADOR")
+                        .requestMatchers(HttpMethod.POST, "/images/register").permitAll()
 //                        .requestMatchers(HttpMethod.DELETE, "/images/delete/{id}").hasRole("LOCADOR")
                         .requestMatchers(HttpMethod.GET, "/images/list").permitAll()
                         //Requisições feedback-
