@@ -47,6 +47,7 @@ public class UserService {
     public UserDetails returnName(String name) {
         return repository.findByLogin(name);
     }
+
     public UserDetails returnemail (String email) {return repository.findByEmail(email);}
 
     public User findById(Long id) {
